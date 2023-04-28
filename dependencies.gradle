@@ -1,0 +1,107 @@
+ext {
+
+    def kotlinVersion = rootProject.ext.kotlin_version
+
+    //libraries
+    coreKtxVersion = "1.7.0"
+    lifecycleVersion = '2.3.1'
+    composeVersion = '1.3.1'
+    composeUiVersion = '1.3.3'
+    composeUiToolingVersion = '1.3.3'
+    materialVersion = "1.7.0"
+    materialComposeVersion = "1.3.1"
+    appcompatVersion = "1.6.0"
+    navigationRuntimeVersion = '2.5.3'
+    fragmentKtxVersion = '1.5.5'
+    lifecycleViewModelVersion = '2.5.1'
+    pagingRuntimeVersion = '3.1.1'
+    navigationFragmentKtxVersion = '2.5.3'
+    navigationUiKtxVersion = '2.5.3'
+    retrofitVersion = '2.9.0'                   // Retrofit
+    gsonVersion = '2.10.1'                      // Gson for retrofit
+    okHttpVersion = '4.10.0'                    // OkHttp
+    coroutinesVersion = ' 1.6.1'                // Coroutines
+    hiltVersion = '2.44'                        // Hilt
+    kaptVersion = '2.44'                        // Hilt Compiler
+    hiltComposeVersion = '1.0.0'                // Hilt Compiler
+    coilVersion = '2.2.2'                       // Coil
+    material3Version = '1.0.1'                  // Material3
+    material3WindowVersion = '1.0.1'            // Material3 Windows size
+    accompanistVersion = '0.28.0'               // Accompanist
+    navigationComposeVersion = '2.5.3'          // Navigation Compose
+    pagingComposeVersion = '1.0.0-alpha17'      // Paging 3.0
+    constraintLayoutVersion = '2.1.4'           // Constraint Compose
+    splashScreenVersion = '1.0.0'               // Splash Screen
+
+    //testing
+    jUnitVersion = "4.13.2"
+    jUnitAndroidVersion = "1.1.5"
+    espressoVersion = "3.5.1"
+    composeUiTestJUnitVersion = '1.3.3'
+    composeUiToolingVersion = '1.3.3'
+    composeUiTestManifestVersion = '1.3.3'
+
+    //app
+    appDependencies = [
+            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+            coreKtx                : "androidx.core:core-ktx:${coreKtxVersion}",
+            lifecycle              : "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleVersion}",
+            compose                : "androidx.activity:activity-compose:${composeVersion}",
+            composeUi              : "androidx.compose.ui:ui:${composeUiVersion}",
+            composeUiToolingPreview: "androidx.compose.ui:ui-tooling-preview:${composeUiToolingVersion}",
+            material               : "com.google.android.material:material:${materialVersion}",
+            materialCompose        : "androidx.compose.material:material:${materialComposeVersion}",
+            gson                   : "com.google.code.gson:gson:${gsonVersion}",
+            coroutines             : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+            hilt                   : "com.google.dagger:hilt-android:${hiltVersion}",
+            hiltCompose            : "androidx.hilt:hilt-navigation-compose:${hiltComposeVersion}",
+            kapt                   : "com.google.dagger:hilt-android-compiler:${kaptVersion}",
+            coil                   : "io.coil-kt:coil-compose:${coilVersion}",
+            material3              : "androidx.compose.material3:material3:${material3Version}",
+            material3Window        : "androidx.compose.material3:material3-window-size-class:${material3WindowVersion}",
+            accompanist            : "com.google.accompanist:accompanist-systemuicontroller:${accompanistVersion}",
+            navigationCompose      : "androidx.navigation:navigation-compose:${navigationComposeVersion}",
+            navigationRuntime      : "androidx.navigation:navigation-runtime:${navigationRuntimeVersion}",
+            splashScreen           : "androidx.core:core-splashscreen:${splashScreenVersion}",
+            fragmentKtx            : "androidx.fragment:fragment-ktx:${fragmentKtxVersion}",
+            navigationUiKtx        : "androidx.navigation:navigation-ui-ktx:${navigationUiKtxVersion}",
+            navigationFragmentKtx  : "androidx.navigation:navigation-fragment-ktx:${navigationFragmentKtxVersion}",
+            lifecycleViewModel     : "androidx.lifecycle:lifecycle-viewmodel-compose:${lifecycleViewModelVersion}",
+            pagingCompose          : "androidx.paging:paging-compose:${pagingComposeVersion}",
+            pagingRuntime          : "androidx.paging:paging-runtime:${pagingRuntimeVersion}",
+            appcompat              : "androidx.appcompat:appcompat:${appcompatVersion}",
+            constraintLayout       : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+    ]
+
+    appTestDependencies = [
+            jUnit                : "junit:junit:${jUnitVersion}",
+            androidJUnit         : "androidx.test.ext:junit:${jUnitAndroidVersion}",
+            espresso             : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            composeUiTestJUnit   : "androidx.compose.ui:ui-test-junit4:${composeUiTestJUnitVersion}",
+            composeUiTooling     : "androidx.compose.ui:ui-tooling:${composeUiToolingVersion}",
+            composeUiTestManifest: "androidx.compose.ui:ui-test-manifest:${composeUiTestManifestVersion}"
+    ]
+
+    //domain
+    domainTestDependencies = [
+            jUnit: "junit:junit:${jUnitVersion}",
+    ]
+
+    //data
+    dataDependencies = [
+            retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter: "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+            coreKtx          : "androidx.core:core-ktx:${coreKtxVersion}",
+            material         : "com.google.android.material:material:${materialVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersion}",
+    ]
+
+    dataTestDependencies = [
+            jUnit           : "junit:junit:${jUnitVersion}",
+            androidTestJUnit: "androidx.test.ext:junit:${jUnitAndroidVersion}",
+            espresso        : "androidx.test.espresso:espresso-core:${espressoVersion}",
+    ]
+
+}

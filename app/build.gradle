@@ -1,18 +1,31 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id "dagger.hilt.android.plugin"
 }
 
 android {
+
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        android.buildFeatures.dataBinding = true
+    }
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
     namespace 'com.alerdoci.ultimatepokedex'
-    compileSdk 33
+    compileSdk globalConfiguration["androidCompileSdkVersion"]
 
     defaultConfig {
-        applicationId "com.alerdoci.ultimatepokedex"
-        minSdk 26
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        applicationId globalConfiguration["androidApplicationId"]
+        minSdk globalConfiguration["androidMinSdkVersion"]
+        targetSdk globalConfiguration["androidTargetSdkVersion"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,16 +35,26 @@ android {
 
     buildTypes {
         release {
+//            buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/3/"'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+//            buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/3/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '11'
+    }
+    kotlin {
+        jvmToolchain(11)
     }
     buildFeatures {
         compose true
@@ -47,21 +70,51 @@ android {
 }
 
 dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
 
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.7.1'
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
-    implementation 'androidx.compose.material3:material3'
+    implementation appDependencies.kotlin
+    implementation appDependencies.coreKtx
+    implementation appDependencies.lifecycle
+    implementation appDependencies.compose
+    implementation appDependencies.composeUi
+    implementation appDependencies.composeUiToolingPreview
+    implementation appDependencies.material
+    implementation appDependencies.materialCompose
+    implementation appDependencies.gson
+    implementation appDependencies.coroutines
+    implementation appDependencies.hilt
+    implementation appDependencies.hiltCompose
+    kapt appDependencies.kapt
+    implementation appDependencies.coil
+    implementation appDependencies.material3
+    implementation appDependencies.material3Window
+    implementation appDependencies.accompanist
+    implementation appDependencies.navigationCompose
+    implementation appDependencies.navigationRuntime
+    implementation appDependencies.fragmentKtx
+    implementation appDependencies.lifecycleViewModel
+    implementation appDependencies.pagingCompose
+    implementation appDependencies.pagingRuntime
+    implementation appDependencies.navigationFragmentKtx
+    implementation appDependencies.navigationUiKtx
+    implementation appDependencies.splashScreen
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.appcompat
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitConverter
+    implementation dataDependencies.okHttp
+    testImplementation appTestDependencies.jUnit
+
+    androidTestImplementation appTestDependencies.androidJUnit
+    androidTestImplementation appTestDependencies.espresso
+    androidTestImplementation appTestDependencies.composeUiTestJUnit
+
+    debugImplementation appTestDependencies.composeUiTooling
+    debugImplementation appTestDependencies.composeUiTestManifest
+}
+
+kapt {
+    correctErrorTypes = true
 }

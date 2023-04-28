@@ -10,8 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alerdoci.ultimatepokedex.ui.theme.UltimatePokedexTheme
-import com.alerdoci.ultimatepokedex.ui.theme.pokemonFont
+import com.alerdoci.ultimatepokedex.presentation.theme.UltimatePokedexTheme
+import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

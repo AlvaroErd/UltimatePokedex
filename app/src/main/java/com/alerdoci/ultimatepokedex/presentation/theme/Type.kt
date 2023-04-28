@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.ui.theme
+package com.alerdoci.ultimatepokedex.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
