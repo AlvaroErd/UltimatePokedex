@@ -101,6 +101,7 @@ dependencies {
     implementation appDependencies.splashScreen
     implementation appDependencies.constraintLayout
     implementation appDependencies.appcompat
+    implementation appDependencies.lottie
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter

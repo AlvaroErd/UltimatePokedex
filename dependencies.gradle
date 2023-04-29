@@ -32,6 +32,7 @@ ext {
     pagingComposeVersion = '1.0.0-alpha17'      // Paging 3.0
     constraintLayoutVersion = '2.1.4'           // Constraint Compose
     splashScreenVersion = '1.0.0'               // Splash Screen
+    lottieVersion = '5.0.1'                     // Lottie
 
     //testing
     jUnitVersion = "4.13.2"
@@ -71,6 +72,7 @@ ext {
             pagingRuntime          : "androidx.paging:paging-runtime:${pagingRuntimeVersion}",
             appcompat              : "androidx.appcompat:appcompat:${appcompatVersion}",
             constraintLayout       : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            lottie               : "com.airbnb.android:lottie:${lottieVersion}"
     ]
 
     appTestDependencies = [
