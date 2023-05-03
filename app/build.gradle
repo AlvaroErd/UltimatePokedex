@@ -101,11 +101,15 @@ dependencies {
     implementation appDependencies.splashScreen
     implementation appDependencies.constraintLayout
     implementation appDependencies.appcompat
-    implementation appDependencies.lottie
+//    implementation appDependencies.lottie
+    implementation appDependencies.lottieCompose
+    implementation appDependencies.accompanistPager
+    implementation appDependencies.accompanistPagerIndicator
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter
     implementation dataDependencies.okHttp
+    implementation dataDependencies.datastore
     testImplementation appTestDependencies.jUnit
 
     androidTestImplementation appTestDependencies.androidJUnit

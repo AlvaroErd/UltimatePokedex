@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlin_version = '1.8.0'
-        hilt_version = '2.35'
+        hilt_version = '2.40.1'
         compose_ui_version = '1.4.2'
     }
 

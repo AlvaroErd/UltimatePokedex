@@ -3,48 +3,45 @@ package com.alerdoci.ultimatepokedex
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import com.alerdoci.ultimatepokedex.navigation.SetupNavGraph
 import com.alerdoci.ultimatepokedex.presentation.theme.UltimatePokedexTheme
-import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
+import com.alerdoci.ultimatepokedex.presentation.viewmodel.SplashViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var splashViewModel: SplashViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        val screenSplash = installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContent {
-            UltimatePokedexTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+
+        installSplashScreen().apply {
+            Thread.sleep(3000)
+            this.setKeepOnScreenCondition {
+                !splashViewModel.isLoading.value
             }
         }
-    }
-}
+//
+//        installSplashScreen().setKeepOnScreenCondition {
+//            !splashViewModel.isLoading.value
+//        }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier,
-        fontFamily = pokemonFont
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UltimatePokedexTheme {
-        Greeting("Android")
+        setContent {
+            UltimatePokedexTheme {
+                val screen by splashViewModel.startDestination
+                val navController = rememberNavController()
+                SetupNavGraph(navController = navController, startDestination = screen)
+            }
+        }
     }
 }

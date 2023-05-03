@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.UltimatePokedex" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.UltimatePokedex" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor" >@color/grey_900</item>
+        <item name="android:navigationBarColor">@color/grey_900</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">:
-        <item name="windowSplashScreenBackground">@color/purple_200</item>
-        <item name="windowSplashScreenAnimatedIcon">@raw/splash_pokeball_lottie</item>
-        <item name="windowSplashScreenAnimationDuration">2000</item>
+    <style name="Theme.UltimatePokedexSplashScreen" parent="Theme.SplashScreen">:
+        <item name="windowSplashScreenBackground">#F28A78</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_pokeball</item>
+        <item name="windowSplashScreenAnimationDuration">5000</item>
         <item name="postSplashScreenTheme">@style/Theme.UltimatePokedex</item>
-<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/brand_logo_night</item>-->
+         <item name="android:windowSplashScreenBrandingImage">@drawable/splash_brand_logo_by_alerdoci</item>
     </style>
 
 </resources>
