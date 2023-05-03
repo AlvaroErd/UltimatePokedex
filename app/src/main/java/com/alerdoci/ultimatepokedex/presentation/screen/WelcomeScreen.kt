@@ -2,8 +2,10 @@ package com.alerdoci.ultimatepokedex.presentation.screen
 
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,13 +18,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,8 +36,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.alerdoci.ultimatepokedex.R
+import com.alerdoci.ultimatepokedex.navigation.Screen
 import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_dark_background
 import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_dark_error
+import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_light_primaryContainer
+import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
 import com.alerdoci.ultimatepokedex.presentation.util.LoaderIntro
 import com.alerdoci.ultimatepokedex.presentation.util.OnBoardingData
 import com.alerdoci.ultimatepokedex.presentation.viewmodel.WelcomeViewModel
@@ -52,25 +62,25 @@ fun WelcomeScreen(
     val items = ArrayList<OnBoardingData>()
     items.add(
         OnBoardingData(
-            com.alerdoci.ultimatepokedex.R.raw.lottie_nintendo_switch,
-            "What should I eat today?",
-            "If you can't decide what to eat, Meal Mate now with you!"
+            R.raw.lottie_hello_squirtle,
+            "Hello pokemon lover!",
+            "I´m Alerdoci, I hope you like the app!"
         )
     )
     items.add(
         OnBoardingData(
-            com.alerdoci.ultimatepokedex.R.raw.lottie_nintendo_switch,
+            R.raw.lottie_nintendo_switch,
             "Taste a different dish every day!",
             "Eat the food you want with a wide range of products!"
         )
     )
-            items.add(
-                OnBoardingData(
-                    com.alerdoci.ultimatepokedex.R.raw.lottie_nintendo_switch,
-                    "You have your order in minutes!",
-                    "Easy ordering and fast transportation"
-                )
-            )
+    items.add(
+        OnBoardingData(
+            R.raw.lottie_boy_developer_laptop,
+            "You have your order in minutes!",
+            "Easy ordering and fast transportation"
+        )
+    )
     val pagerState = rememberPagerState(
         pageCount = items.size,
         initialOffscreenLimit = 2,
@@ -85,6 +95,14 @@ fun WelcomeScreen(
             .fillMaxWidth()
             .background(color = Color.White)
     )
+    FinishButton(
+        modifier = Modifier.fillMaxWidth(),
+        pagerState = pagerState
+    ) {
+        welcomeViewModel.saveOnBoardingState(completed = true)
+        navController.popBackStack()
+        navController.navigate(Screen.Home.route)
+    }
 }
 
 @ExperimentalPagerApi
@@ -109,7 +127,7 @@ fun OnBoardingPager(
                 ) {
                     LoaderIntro(
                         modifier = Modifier
-                            .size(200.dp)
+                            .size(300.dp)
                             .fillMaxWidth()
                             .align(alignment = Alignment.CenterHorizontally), item[page].image
                     )
@@ -256,6 +274,8 @@ fun BottomSection(
 }
 
 //
+
+//
 //@ExperimentalAnimationApi
 //@ExperimentalPagerApi
 //@Composable
@@ -330,36 +350,65 @@ fun BottomSection(
 //        )
 //    }
 //}
-//
-//@ExperimentalAnimationApi
-//@ExperimentalPagerApi
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
+@Composable
+fun FinishButton(
+    modifier: Modifier,
+    pagerState: PagerState,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .padding(horizontal = 40.dp),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        AnimatedVisibility(
+            modifier = Modifier.fillMaxWidth(),
+            visible = pagerState.currentPage == 2
+        ) {
+            OutlinedButton(
+                modifier = modifier
+                    .padding(16.dp)
+                    .height(48.dp)
+                    .fillMaxWidth(),
+                onClick = onClick,
+                shape = RoundedCornerShape(24.dp),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White,
+                    containerColor = Color.Transparent,
+                ),
+                elevation = ButtonDefaults.buttonElevation(),
+//                border = ButtonDefaults.outlinedButtonBorder,
+                border = BorderStroke(
+                    width = 2.dp,
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFFDA9A4E),
+                            Color(0xFF3B02E5)
+                        ),
+                    ),
+                )
+            ) {
+                Text(
+                    text = "Let's Go!",
+                    fontFamily = pokemonFont,
+                    color = md_theme_light_primaryContainer
+                )
+            }
+        }
+    }
+}
+
+//@OptIn(ExperimentalPagerApi::class, ExperimentalAnimationApi::class)
+//@Preview
 //@Composable
-//fun FinishButton(
-//    modifier: Modifier,
-//    pagerState: PagerState,
-//    onClick: () -> Unit
-//) {
-//    Row(
-//        modifier = modifier
-//            .padding(horizontal = 40.dp),
-//        verticalAlignment = Alignment.Top,
-//        horizontalArrangement = Arrangement.Center
-//    ) {
-//        AnimatedVisibility(
-//            modifier = Modifier.fillMaxWidth(),
-//            visible = pagerState.currentPage == 2
-//        ) {
-//            Button(
-//                onClick = onClick,
-//                colors = ButtonDefaults.buttonColors(
-//                    contentColor = Color.White
-//                )
-//            ) {
-//                Text(text = "Finish")
-//            }
-//        }
+//fun FinishButtonPreview() {
+//    FinishButton(modifier = Modifier.fillMaxWidth(), pagerState = PagerState(2)) {
 //    }
 //}
+
 //
 //@Composable
 //@Preview(showBackground = true)
@@ -384,3 +433,4 @@ fun BottomSection(
 //        PagerScreen(onBoardingPage = OnBoardingPage.Third)
 //    }
 //}
+

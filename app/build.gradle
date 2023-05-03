@@ -79,8 +79,6 @@ dependencies {
     implementation appDependencies.compose
     implementation appDependencies.composeUi
     implementation appDependencies.composeUiToolingPreview
-    implementation appDependencies.material
-    implementation appDependencies.materialCompose
     implementation appDependencies.gson
     implementation appDependencies.coroutines
     implementation appDependencies.hilt
@@ -101,7 +99,7 @@ dependencies {
     implementation appDependencies.splashScreen
     implementation appDependencies.constraintLayout
     implementation appDependencies.appcompat
-//    implementation appDependencies.lottie
+    implementation appDependencies.lottieXML
     implementation appDependencies.lottieCompose
     implementation appDependencies.accompanistPager
     implementation appDependencies.accompanistPagerIndicator
