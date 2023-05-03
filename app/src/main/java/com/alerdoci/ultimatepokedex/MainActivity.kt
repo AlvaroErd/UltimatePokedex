@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         installSplashScreen().apply {
-            Thread.sleep(3000)
+            Thread.sleep(2100)
             this.setKeepOnScreenCondition {
                 !splashViewModel.isLoading.value
             }

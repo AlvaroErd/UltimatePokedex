@@ -6,7 +6,15 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
@@ -55,7 +63,7 @@ fun WelcomeScreen(
             "Taste a different dish every day!",
             "Eat the food you want with a wide range of products!"
         )
-    ) añadido un pequeño onboarding al inico de la app que solo se mostrará una vez
+    )
             items.add(
                 OnBoardingData(
                     com.alerdoci.ultimatepokedex.R.raw.lottie_nintendo_switch,
