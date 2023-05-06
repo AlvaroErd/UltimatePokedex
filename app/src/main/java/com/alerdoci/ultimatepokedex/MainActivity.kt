@@ -31,10 +31,6 @@ class MainActivity : ComponentActivity() {
                 !splashViewModel.isLoading.value
             }
         }
-//
-//        installSplashScreen().setKeepOnScreenCondition {
-//            !splashViewModel.isLoading.value
-//        }
 
         setContent {
             UltimatePokedexTheme {

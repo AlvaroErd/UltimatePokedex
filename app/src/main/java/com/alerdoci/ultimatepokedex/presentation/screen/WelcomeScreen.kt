@@ -1,17 +1,16 @@
 package com.alerdoci.ultimatepokedex.presentation.screen
 
-import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,17 +18,22 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -38,8 +42,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.navigation.Screen
-import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_dark_background
-import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_dark_error
+import com.alerdoci.ultimatepokedex.presentation.theme.BottomCardShape
+import com.alerdoci.ultimatepokedex.presentation.theme.ColorBlue
+import com.alerdoci.ultimatepokedex.presentation.theme.ColorGreen
+import com.alerdoci.ultimatepokedex.presentation.theme.ColorYellow
+import com.alerdoci.ultimatepokedex.presentation.theme.dosisFont
 import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_light_primaryContainer
 import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
 import com.alerdoci.ultimatepokedex.presentation.util.LoaderIntro
@@ -48,308 +55,258 @@ import com.alerdoci.ultimatepokedex.presentation.viewmodel.WelcomeViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
-import kotlin.system.exitProcess
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-
+@OptIn(DelicateCoroutinesApi::class)
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
 fun WelcomeScreen(
-    navController: NavHostController,
-    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+    navController: NavHostController
 ) {
-    val items = ArrayList<OnBoardingData>()
-    items.add(
-        OnBoardingData(
-            R.raw.lottie_hello_squirtle,
-            "Hello pokemon lover!",
-            "I´m Alerdoci, I hope you like the app!"
-        )
-    )
-    items.add(
-        OnBoardingData(
-            R.raw.lottie_nintendo_switch,
-            "Taste a different dish every day!",
-            "Eat the food you want with a wide range of products!"
-        )
-    )
-    items.add(
-        OnBoardingData(
-            R.raw.lottie_boy_developer_laptop,
-            "You have your order in minutes!",
-            "Easy ordering and fast transportation"
-        )
-    )
-    val pagerState = rememberPagerState(
-        pageCount = items.size,
-        initialOffscreenLimit = 2,
-        infiniteLoop = false,
-        initialPage = 0
-    )
+    Surface(modifier = Modifier.fillMaxSize()) {
 
-    OnBoardingPager(
-        item = items,
-        pagerState = pagerState,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(color = Color.White)
-    )
-    FinishButton(
-        modifier = Modifier.fillMaxWidth(),
-        pagerState = pagerState
-    ) {
-        welcomeViewModel.saveOnBoardingState(completed = true)
-        navController.popBackStack()
-        navController.navigate(Screen.Home.route)
+        val items = ArrayList<OnBoardingData>()
+
+        items.add(
+            OnBoardingData(
+                R.raw.lottie_hello_squirtle,
+                "Hello pokemon lover!",
+                "I´m Alerdoci, I hope you like the app!Cu praesent sapientem falli definiebas malorum constituam delicata. ",
+                backgroundColor = Color(0xFF0189C5),
+                mainColor = ColorBlue
+            )
+        )
+        items.add(
+            OnBoardingData(
+                R.raw.lottie_nintendo_switch,
+                "Taste a different dish every day!",
+                "Eat the food you want with a wide range of products!",
+                backgroundColor = Color(0xFFE4AF19),
+                mainColor = ColorYellow
+            )
+        )
+        items.add(
+            OnBoardingData(
+                R.raw.lottie_boy_developer_laptop,
+                "You have your order in minutes!",
+                "Easy ordering and fast transportation",
+                backgroundColor = Color(0xFF96E172),
+                mainColor = ColorGreen
+            )
+        )
+        val pagerState = rememberPagerState(
+            initialPage = 0,
+        )
+        OnBoardingPager(
+            item = items,
+            pagerState = pagerState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Gray),
+            navController = navController,
+            welcomeViewModel = hiltViewModel()
+        )
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
+@DelicateCoroutinesApi
 @ExperimentalPagerApi
 @Composable
 fun OnBoardingPager(
     item: List<OnBoardingData>,
     pagerState: PagerState,
     modifier: Modifier = Modifier,
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
 ) {
     Box(modifier = modifier) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            HorizontalPager(
-                state = pagerState
-            ) { page ->
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            HorizontalPager(state = pagerState, count = 3) { page ->
                 Column(
                     modifier = Modifier
-                        .padding(60.dp)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxSize()
+                        .background(item[page].backgroundColor),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
                 ) {
                     LoaderIntro(
                         modifier = Modifier
                             .size(300.dp)
                             .fillMaxWidth()
-                            .align(alignment = Alignment.CenterHorizontally), item[page].image
-                    )
-                    Text(
-                        text = item[page].title,
-                        modifier = Modifier.padding(top = 50.dp),
-                        color = Color.Black,
-                        style = MaterialTheme.typography.headlineSmall,
-                        textAlign = TextAlign.Center
-                    )
-
-                    Text(
-                        text = item[page].desc,
-                        modifier = Modifier.padding(top = 30.dp, start = 20.dp, end = 20.dp),
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+                            .align(alignment = Alignment.CenterHorizontally),
+                        item[page].image
                     )
                 }
             }
-
-            PagerIndicator(item.size, pagerState.currentPage)
         }
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BottomSection(pagerState.currentPage, onSkipClick = {
-                pagerState.pageCount + 2
-            }, onNextClick = {
-                if (pagerState.currentPage == item.size - 1) {
-                    exitProcess(0)
-                } else {
-                    pagerState.pageCount + 1
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(340.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White,
+                ),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 10.dp
+                ),
+                shape = BottomCardShape.large
+            ) {
+                Box(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(Color.White)
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        PagerIndicator(
+                            items = item,
+                            currentPage = pagerState.currentPage
+                        )
+                        Text(
+                            text = item[pagerState.currentPage].title,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 15.dp)
+                                .padding(15.dp),
+                            color = item[pagerState.currentPage].mainColor,
+                            fontFamily = dosisFont,
+                            textAlign = TextAlign.Center,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = item[pagerState.currentPage].desc,
+                            modifier = Modifier.padding(
+                                top = 20.dp,
+                                start = 40.dp,
+                                end = 20.dp
+                            ),
+                            color = Color.Gray,
+                            fontFamily = dosisFont,
+                            fontSize = 17.sp,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Normal
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(30.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            if (pagerState.currentPage != 2) {
+                                TextButton(onClick = {
+                                    welcomeViewModel.saveOnBoardingState(completed = true)
+                                    navController.popBackStack()
+                                    navController.navigate(Screen.Home.route)
+                                }) {
+                                    Text(
+                                        text = "Skip Now",
+                                        color = Color(0xFF292D32),
+                                        fontFamily = dosisFont,
+                                        textAlign = TextAlign.Right,
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
+                                OutlinedButton(
+                                    onClick = {
+                                        GlobalScope.launch {
+                                            withContext(Dispatchers.Main) {
+                                                pagerState.scrollToPage(
+                                                    pagerState.currentPage + 1,
+                                                    pageOffset = 0f
+                                                )
+                                            }
+                                        }
+                                    },
+                                    border = BorderStroke(
+                                        14.dp,
+                                        item[pagerState.currentPage].mainColor
+                                    ),
+                                    shape = CircleShape,
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        contentColor = item[pagerState.currentPage].mainColor
+                                    ),
+                                    modifier = Modifier.size(65.dp)
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_right_arrow),
+                                        contentDescription = "",
+                                        tint = item[pagerState.currentPage].mainColor,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            } else {
+                                FinishButton(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(2.dp),
+                                    pagerState = pagerState,
+                                ) {
+                                    welcomeViewModel.saveOnBoardingState(completed = true)
+                                    navController.popBackStack()
+                                    navController.navigate(Screen.Home.route)
+                                }
+                            }
+                        }
+                    }
                 }
-            }, isSkipClicked = true)
+            }
         }
     }
+}
+
+@Composable
+fun PagerIndicator(currentPage: Int, items: List<OnBoardingData>) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.padding(top = 20.dp)
+    ) {
+        repeat(items.size) {
+            Indicator(isSelected = it == currentPage, color = items[it].mainColor)
+        }
+    }
+}
+
+@Composable
+fun Indicator(isSelected: Boolean, color: Color) {
+    val width = animateDpAsState(targetValue = if (isSelected) 40.dp else 10.dp)
+    Box(
+        modifier = Modifier
+            .padding(4.dp)
+            .height(10.dp)
+            .width(width.value)
+            .clip(CircleShape)
+            .background(
+                if (isSelected) color else Color.Gray.copy(alpha = 0.5f)
+            )
+    )
 }
 
 @ExperimentalPagerApi
 @Composable
 fun rememberPagerState(
-    @IntRange(from = 0) pageCount: Int,
-    @IntRange(from = 0) initialPage: Int = 0,
-    @FloatRange(from = 0.0, to = 1.0) initialPageOffset: Float = 0f,
-    @IntRange(from = 1) initialOffscreenLimit: Int = 1,
-    infiniteLoop: Boolean = false
-): PagerState = rememberSaveable(
-    saver = PagerState.Saver
-) {
+    @IntRange(from = 0) initialPage: Int = 0
+): PagerState = rememberSaveable(saver = PagerState.Saver) {
     PagerState(
-        pageCount = pageCount,
         currentPage = initialPage,
-        currentPageOffset = initialPageOffset,
-        offscreenLimit = initialOffscreenLimit,
-        infiniteLoop = infiniteLoop
     )
 }
 
-@Composable
-fun PagerIndicator(
-    size: Int,
-    currentPage: Int
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(top = 60.dp)
-    ) {
-        repeat(size) {
-            Indicator(isSelected = it == currentPage)
-        }
-    }
-}
-
-@Composable
-fun Indicator(isSelected: Boolean) {
-    val width = animateDpAsState(targetValue = if (isSelected) 25.dp else 10.dp)
-
-    Box(
-        modifier = Modifier
-            .padding(1.dp)
-            .height(10.dp)
-            .width(width.value)
-            .clip(CircleShape)
-            .background(
-                if (isSelected) md_theme_dark_background else md_theme_dark_error.copy(alpha = 0.5f)
-            )
-    )
-}
-
-@ExperimentalPagerApi
-@Composable
-fun BottomSection(
-    currentPage: Int,
-    onSkipClick: () -> Unit,
-    onNextClick: () -> Unit,
-    isSkipClicked: Boolean
-) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .padding(start = 20.dp, end = 20.dp, bottom = 50.dp)
-            .fillMaxWidth()
-    ) {
-        if (currentPage != 2) {
-            if (isSkipClicked) {
-                androidx.compose.material3.Text(
-                    text = "Skip",
-                    color = md_theme_dark_background,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(top = 10.dp, bottom = 10.dp)
-                        .clickable {
-                            onSkipClick()
-                        }
-                )
-            }
-        }
-        if (currentPage == 2) {
-            androidx.compose.material3.Text(
-                text = "Done",
-                color = md_theme_dark_background,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .padding(top = 10.dp, bottom = 10.dp)
-                    .clickable(onClick = {
-                        exitProcess(0)
-                    })
-            )
-        } else {
-            androidx.compose.material3.Text(
-                text = "Next",
-                color = md_theme_dark_background,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .padding(top = 10.dp, bottom = 10.dp)
-                    .clickable(onClick = {
-                        onNextClick()
-                    })
-            )
-        }
-    }
-}
-
-//
-
-//
-//@ExperimentalAnimationApi
-//@ExperimentalPagerApi
-//@Composable
-//fun WelcomeScreen(
-//    navController: NavHostController,
-//    welcomeViewModel: WelcomeViewModel = hiltViewModel()
-//) {
-//    val pages = listOf(
-//        OnBoardingData.Item1,
-//        OnBoardingData.Item2,
-//        OnBoardingData.Item3
-//    )
-//    val pagerState = rememberPagerState(3)
-//
-//    Column(modifier = Modifier.fillMaxSize()) {
-//        HorizontalPager(
-//            modifier = Modifier.weight(10f),
-//            state = pagerState,
-//            verticalAlignment = Alignment.Top
-//        ) { position ->
-//            PagerScreen(onBoardingPage = pages[position])
-//        }
-//        HorizontalPagerIndicator(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .weight(1f),
-//            pagerState = pagerState
-//        )
-//        FinishButton(
-//            modifier = Modifier.weight(1f),
-//            pagerState = pagerState
-//        ) {
-//            welcomeViewModel.saveOnBoardingState(completed = true)
-//            navController.popBackStack()
-//            navController.navigate(Screen.Home.route)
-//        }
-//    }
-//}
-//
-//@Composable
-//fun PagerScreen(onBoardingPage: OnBoardingData) {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth(),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Top
-//    ) {
-//        Image(
-//            modifier = Modifier
-//                .fillMaxWidth(0.5f)
-//                .fillMaxHeight(0.7f),
-//            painter = painterResource(onBoardingPage.animationResId),
-//            contentDescription = "Pager Image"
-//        )
-//        Text(
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            text = onBoardingPage.title,
-//            fontSize = MaterialTheme.typography.titleLarge.fontSize,
-//            fontWeight = FontWeight.Bold,
-//            textAlign = TextAlign.Center
-//        )
-//        Text(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 40.dp)
-//                .padding(top = 20.dp),
-//            text = onBoardingPage.description,
-//            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-//            fontWeight = FontWeight.Medium,
-//            textAlign = TextAlign.Center
-//        )
-//    }
-//}
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
@@ -380,7 +337,6 @@ fun FinishButton(
                     containerColor = Color.Transparent,
                 ),
                 elevation = ButtonDefaults.buttonElevation(),
-//                border = ButtonDefaults.outlinedButtonBorder,
                 border = BorderStroke(
                     width = 2.dp,
                     brush = Brush.linearGradient(
@@ -400,37 +356,3 @@ fun FinishButton(
         }
     }
 }
-
-//@OptIn(ExperimentalPagerApi::class, ExperimentalAnimationApi::class)
-//@Preview
-//@Composable
-//fun FinishButtonPreview() {
-//    FinishButton(modifier = Modifier.fillMaxWidth(), pagerState = PagerState(2)) {
-//    }
-//}
-
-//
-//@Composable
-//@Preview(showBackground = true)
-//fun FirstOnBoardingScreenPreview() {
-//    Column(modifier = Modifier.fillMaxSize()) {
-//        PagerScreen(onBoardingPage = OnBoardingPage.First)
-//    }
-//}
-//
-//@Composable
-//@Preview(showBackground = true)
-//fun SecondOnBoardingScreenPreview() {
-//    Column(modifier = Modifier.fillMaxSize()) {
-//        PagerScreen(onBoardingPage = OnBoardingPage.Second)
-//    }
-//}
-//
-//@Composable
-//@Preview(showBackground = true)
-//fun ThirdOnBoardingScreenPreview() {
-//    Column(modifier = Modifier.fillMaxSize()) {
-//        PagerScreen(onBoardingPage = OnBoardingPage.Third)
-//    }
-//}
-

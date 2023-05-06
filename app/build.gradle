@@ -88,6 +88,7 @@ dependencies {
     implementation appDependencies.material3
     implementation appDependencies.material3Window
     implementation appDependencies.accompanist
+    implementation appDependencies.accompanistPager
     implementation appDependencies.navigationCompose
     implementation appDependencies.navigationRuntime
     implementation appDependencies.fragmentKtx
@@ -102,7 +103,6 @@ dependencies {
     implementation appDependencies.lottieXML
     implementation appDependencies.lottieCompose
     implementation appDependencies.accompanistPager
-    implementation appDependencies.accompanistPagerIndicator
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter
