@@ -32,6 +32,7 @@ val md_theme_light_surfaceTint = Color(0xFF705D00)
 val md_theme_light_outlineVariant = Color(0xFFCEC6B4)
 val md_theme_light_scrim = Color(0xFF000000)
 
+
 val md_theme_dark_primary = Color(0xFFE7C430)
 val md_theme_dark_onPrimary = Color(0xFF3B2F00)
 val md_theme_dark_primaryContainer = Color(0xFF554600)
@@ -62,6 +63,12 @@ val md_theme_dark_surfaceTint = Color(0xFFE7C430)
 val md_theme_dark_outlineVariant = Color(0xFF4B4639)
 val md_theme_dark_scrim = Color(0xFF000000)
 
+// Bar Colors
+//val ultimatePokedexDarkBlueStatus = Color(0xFF333A41)
+val ultimatePokedexDarkBlueStatus = Color(0x22333A41)
+val ultimatePokedexLightGrayStatus = Color(0xFFDADFDF)
+
+// OnBoarding Colors
 val ColorBlue = Color(0xFF00B5EA)
 val ColorYellow = Color(0xFFFAD206)
 val ColorGreen = Color(0xFF80DD65)

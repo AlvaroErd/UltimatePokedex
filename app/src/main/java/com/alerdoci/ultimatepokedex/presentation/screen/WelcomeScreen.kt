@@ -83,7 +83,7 @@ fun WelcomeScreen(
         )
         items.add(
             OnBoardingData(
-                R.raw.lottie_nintendo_switch,
+                R.raw.lottie_boy_developer_laptop,
                 "Taste a different dish every day!",
                 "Eat the food you want with a wide range of products!",
                 backgroundColor = Color(0xFFE4AF19),
@@ -92,7 +92,7 @@ fun WelcomeScreen(
         )
         items.add(
             OnBoardingData(
-                R.raw.lottie_boy_developer_laptop,
+                R.raw.lottie_android_jetpack,
                 "You have your order in minutes!",
                 "Easy ordering and fast transportation",
                 backgroundColor = Color(0xFF96E172),

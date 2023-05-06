@@ -1,6 +1,5 @@
 package com.alerdoci.ultimatepokedex.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -10,10 +9,8 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -80,6 +77,9 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+private val darkBlueStatus = ultimatePokedexDarkBlueStatus
+private val lightGrayStatus = ultimatePokedexLightGrayStatus
+
 @Composable
 fun UltimatePokedexTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -87,6 +87,10 @@ fun UltimatePokedexTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+
+//    val systemUiController: SystemUiController = rememberSystemUiController()
+//    systemUiController.isStatusBarVisible = false
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
@@ -96,13 +100,21 @@ fun UltimatePokedexTheme(
         darkTheme -> DarkColors
         else -> LightColors
     }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-        }
+//    val view = LocalView.current
+//    if (!view.isInEditMode) {
+//        SideEffect {
+//            val window = (view.context as Activity).window
+//            window.statusBarColor = darkBlueStatus.toArgb()
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+//        }
+//    }
+
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = if (darkTheme) darkBlueStatus
+            else lightGrayStatus
+        )
     }
 
     MaterialTheme(
