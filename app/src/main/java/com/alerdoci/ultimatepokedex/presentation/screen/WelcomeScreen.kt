@@ -44,7 +44,6 @@ import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.navigation.Screen
 import com.alerdoci.ultimatepokedex.presentation.theme.BottomCardShape
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorBlue
-import com.alerdoci.ultimatepokedex.presentation.theme.ColorGreen
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorYellow
 import com.alerdoci.ultimatepokedex.presentation.theme.dosisFont
 import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_light_primaryContainer
@@ -77,7 +76,7 @@ fun WelcomeScreen(
                 R.raw.lottie_hello_squirtle,
                 "Hello pokemon lover!",
                 "I´m Alerdoci, I hope you like the app!Cu praesent sapientem falli definiebas malorum constituam delicata. ",
-                backgroundColor = Color(0xFF0189C5),
+                backgroundColor = Color(0xFF87C4E3),
                 mainColor = ColorBlue
             )
         )
@@ -86,7 +85,7 @@ fun WelcomeScreen(
                 R.raw.lottie_boy_developer_laptop,
                 "Taste a different dish every day!",
                 "Eat the food you want with a wide range of products!",
-                backgroundColor = Color(0xFFE4AF19),
+                backgroundColor = Color(0xFFFFDF3C),
                 mainColor = ColorYellow
             )
         )
@@ -95,8 +94,8 @@ fun WelcomeScreen(
                 R.raw.lottie_android_jetpack,
                 "You have your order in minutes!",
                 "Easy ordering and fast transportation",
-                backgroundColor = Color(0xFF96E172),
-                mainColor = ColorGreen
+                backgroundColor = Color(0xD30D2F41),
+                mainColor = Color(0xB9073042)
             )
         )
         val pagerState = rememberPagerState(
