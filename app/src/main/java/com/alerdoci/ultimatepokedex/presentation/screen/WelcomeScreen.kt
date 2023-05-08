@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -29,10 +29,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -276,25 +278,37 @@ fun PagerIndicator(currentPage: Int, items: List<OnBoardingData>) {
         modifier = Modifier.padding(top = 20.dp)
     ) {
         repeat(items.size) {
-            Indicator(isSelected = it == currentPage, color = items[it].mainColor)
+            Indicator(
+                isSelected = it == currentPage,
+                color = items[it].mainColor,
+                selectedImage = R.drawable.ic_pokeball_onboarding,
+                unselectedImage = R.drawable.ic_pokeball_onboarding
+            )
         }
     }
 }
 
+
 @Composable
-fun Indicator(isSelected: Boolean, color: Color) {
-    val width = animateDpAsState(targetValue = if (isSelected) 40.dp else 10.dp)
+fun Indicator(isSelected: Boolean, color: Color, selectedImage: Int, unselectedImage: Int) {
+    val size = animateDpAsState(targetValue = if (isSelected) 20.dp else 10.dp)
+
     Box(
         modifier = Modifier
             .padding(4.dp)
-            .height(10.dp)
-            .width(width.value)
-            .clip(CircleShape)
-            .background(
-                if (isSelected) color else Color.Gray.copy(alpha = 0.5f)
-            )
-    )
+            .height(20.dp)
+            .size(size.value),
+        contentAlignment = Center
+    ) {
+        Image(
+            painter = painterResource(if (isSelected) selectedImage else unselectedImage),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            colorFilter = if (isSelected) ColorFilter.tint(color) else ColorFilter.tint(Color.Gray)
+        )
+    }
 }
+
 
 @ExperimentalPagerApi
 @Composable
