@@ -29,7 +29,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -48,7 +50,6 @@ import com.alerdoci.ultimatepokedex.presentation.theme.BottomCardShape
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorBlue
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorYellow
 import com.alerdoci.ultimatepokedex.presentation.theme.dosisFont
-import com.alerdoci.ultimatepokedex.presentation.theme.md_theme_light_primaryContainer
 import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
 import com.alerdoci.ultimatepokedex.presentation.util.LoaderIntro
 import com.alerdoci.ultimatepokedex.presentation.util.OnBoardingData
@@ -127,140 +128,140 @@ fun OnBoardingPager(
     welcomeViewModel: WelcomeViewModel = hiltViewModel()
 ) {
     Box(modifier = modifier) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            HorizontalPager(state = pagerState, count = 3) { page ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(item[page].backgroundColor),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    LoaderIntro(
-                        modifier = Modifier
-                            .size(300.dp)
-                            .fillMaxWidth()
-                            .align(alignment = Alignment.CenterHorizontally),
-                        item[page].image
-                    )
-                }
-            }
-        }
-        Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(340.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White,
-                ),
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 10.dp
-                ),
-                shape = BottomCardShape.large
+        Box() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.align(
+                    BottomCenter
+                )
             ) {
-                Box(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .background(Color.White)
-                ) {
+                HorizontalPager(state = pagerState, count = 3) {
+                    val pageBackground = item[pagerState.currentPage].backgroundColor
+
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(pageBackground),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Bottom
                     ) {
-                        PagerIndicator(
-                            items = item,
-                            currentPage = pagerState.currentPage
-                        )
-                        Text(
-                            text = item[pagerState.currentPage].title,
+                        Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 15.dp)
-                                .padding(15.dp),
-                            color = item[pagerState.currentPage].mainColor,
-                            fontFamily = dosisFont,
-                            textAlign = TextAlign.Center,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.ExtraBold
-                        )
-                        Text(
-                            text = item[pagerState.currentPage].desc,
-                            modifier = Modifier.padding(
-                                top = 20.dp,
-                                start = 40.dp,
-                                end = 20.dp
+                                .height(340.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White,
                             ),
-                            color = Color.Gray,
-                            fontFamily = dosisFont,
-                            fontSize = 17.sp,
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Normal
-                        )
-                    }
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(30.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 10.dp
+                            ),
+                            shape = BottomCardShape.large
                         ) {
-                            if (pagerState.currentPage != 2) {
-                                TextButton(onClick = {
-                                    welcomeViewModel.saveOnBoardingState(completed = true)
-                                    navController.popBackStack()
-                                    navController.navigate(Screen.Home.route)
-                                }) {
+                            Box(
+                                modifier = modifier
+                                    .fillMaxSize()
+                                    .background(Color.White)
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    PagerIndicator(
+                                        items = item,
+                                        currentPage = pagerState.currentPage
+                                    )
+
                                     Text(
-                                        text = "Skip Now",
-                                        color = Color(0xFF292D32),
+                                        text = item[pagerState.currentPage].title,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(top = 15.dp)
+                                            .padding(15.dp),
+                                        color = item[pagerState.currentPage].mainColor,
                                         fontFamily = dosisFont,
-                                        textAlign = TextAlign.Right,
-                                        fontSize = 14.sp,
-                                        fontWeight = FontWeight.SemiBold
+                                        textAlign = TextAlign.Center,
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight.ExtraBold
+                                    )
+                                    Text(
+                                        text = item[pagerState.currentPage].desc,
+                                        modifier = Modifier.padding(
+                                            top = 20.dp,
+                                            start = 40.dp,
+                                            end = 20.dp
+                                        ),
+                                        color = Color.Gray,
+                                        fontFamily = dosisFont,
+                                        fontSize = 17.sp,
+                                        textAlign = TextAlign.Center,
+                                        fontWeight = FontWeight.Normal
                                     )
                                 }
-                                OutlinedButton(
-                                    onClick = {
-                                        GlobalScope.launch {
-                                            withContext(Dispatchers.Main) {
-                                                pagerState.scrollToPage(
-                                                    pagerState.currentPage + 1,
-                                                    pageOffset = 0f
+                                Box(
+                                    modifier = Modifier
+                                        .align(BottomCenter)
+                                        .padding(30.dp)
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                    ) {
+                                        if (pagerState.currentPage != 2) {
+                                            TextButton(onClick = {
+                                                welcomeViewModel.saveOnBoardingState(completed = true)
+                                                navController.popBackStack()
+                                                navController.navigate(Screen.Home.route)
+                                            }) {
+                                                Text(
+                                                    text = "Skip Now",
+                                                    color = Color(0xFF292D32),
+                                                    fontFamily = dosisFont,
+                                                    textAlign = TextAlign.Right,
+                                                    fontSize = 14.sp,
+                                                    fontWeight = FontWeight.SemiBold
                                                 )
                                             }
+                                            OutlinedButton(
+                                                onClick = {
+                                                    GlobalScope.launch {
+                                                        withContext(Dispatchers.Main) {
+                                                            pagerState.scrollToPage(
+                                                                pagerState.currentPage + 1,
+                                                                pageOffset = 0f
+                                                            )
+                                                        }
+                                                    }
+                                                },
+                                                border = BorderStroke(
+                                                    14.dp,
+                                                    item[pagerState.currentPage].mainColor
+                                                ),
+                                                shape = CircleShape,
+                                                colors = ButtonDefaults.outlinedButtonColors(
+                                                    contentColor = item[pagerState.currentPage].mainColor
+                                                ),
+                                                modifier = Modifier.size(65.dp)
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(id = R.drawable.ic_right_arrow),
+                                                    contentDescription = "",
+                                                    tint = item[pagerState.currentPage].mainColor,
+                                                    modifier = Modifier.size(20.dp)
+                                                )
+                                            }
+                                        } else {
+                                            FinishButton(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(2.dp),
+                                                pagerState = pagerState,
+                                            ) {
+                                                welcomeViewModel.saveOnBoardingState(completed = true)
+                                                navController.popBackStack()
+                                                navController.navigate(Screen.Home.route)
+                                            }
                                         }
-                                    },
-                                    border = BorderStroke(
-                                        14.dp,
-                                        item[pagerState.currentPage].mainColor
-                                    ),
-                                    shape = CircleShape,
-                                    colors = ButtonDefaults.outlinedButtonColors(
-                                        contentColor = item[pagerState.currentPage].mainColor
-                                    ),
-                                    modifier = Modifier.size(65.dp)
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.ic_right_arrow),
-                                        contentDescription = "",
-                                        tint = item[pagerState.currentPage].mainColor,
-                                        modifier = Modifier.size(20.dp)
-                                    )
-                                }
-                            } else {
-                                FinishButton(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(2.dp),
-                                    pagerState = pagerState,
-                                ) {
-                                    welcomeViewModel.saveOnBoardingState(completed = true)
-                                    navController.popBackStack()
-                                    navController.navigate(Screen.Home.route)
+                                    }
                                 }
                             }
                         }
@@ -268,8 +269,39 @@ fun OnBoardingPager(
                 }
             }
         }
+        Box() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.align(TopCenter),
+            ) {
+                HorizontalPager(state = pagerState, count = 3) { page2 ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        LoaderIntro(
+                            modifier =
+                            (if (pagerState.currentPage == 1) {
+                                Modifier
+                                    .size(340.dp)
+                                    .fillMaxWidth()
+                                    .align(alignment = Alignment.CenterHorizontally)
+                            } else {
+                                Modifier
+                                    .size(340.dp)
+                                    .fillMaxWidth()
+                                    .padding(end = 20.dp, top = 30.dp)
+                                    .align(alignment = Alignment.CenterHorizontally)
+                            }),
+                            item[page2].image
+                        )
+                    }
+                }
+            }
+        }
     }
 }
+
 
 @Composable
 fun PagerIndicator(currentPage: Int, items: List<OnBoardingData>) {
@@ -290,7 +322,12 @@ fun PagerIndicator(currentPage: Int, items: List<OnBoardingData>) {
 
 
 @Composable
-fun Indicator(isSelected: Boolean, color: Color, selectedImage: Int, unselectedImage: Int) {
+fun Indicator(
+    isSelected: Boolean,
+    color: Color,
+    selectedImage: Int,
+    unselectedImage: Int
+) {
     val size = animateDpAsState(targetValue = if (isSelected) 20.dp else 10.dp)
 
     Box(
@@ -304,7 +341,9 @@ fun Indicator(isSelected: Boolean, color: Color, selectedImage: Int, unselectedI
             painter = painterResource(if (isSelected) selectedImage else unselectedImage),
             contentDescription = null,
             contentScale = ContentScale.Fit,
-            colorFilter = if (isSelected) ColorFilter.tint(color) else ColorFilter.tint(Color.Gray)
+            colorFilter = if (isSelected) ColorFilter.tint(color) else ColorFilter.tint(
+                Color.Gray
+            )
         )
     }
 }
@@ -328,6 +367,8 @@ fun FinishButton(
     pagerState: PagerState,
     onClick: () -> Unit
 ) {
+//    val offset = Offset(5.0f, 10.0f)
+
     Row(
         modifier = modifier
             .padding(horizontal = 40.dp),
@@ -362,8 +403,14 @@ fun FinishButton(
             ) {
                 Text(
                     text = "Let's Go!",
+                    fontSize = 16.sp,
                     fontFamily = pokemonFont,
-                    color = md_theme_light_primaryContainer
+                    color = Color(0xFFF8B24A),
+//                    style = TextStyle(
+//                        shadow = Shadow(
+//                            color = Color.LightGray,
+//                            offset = offset,
+//                            blurRadius = 20f,),)
                 )
             }
         }
