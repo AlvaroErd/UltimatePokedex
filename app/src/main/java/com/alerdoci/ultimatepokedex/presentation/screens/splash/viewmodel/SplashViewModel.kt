@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.presentation.viewmodel
+package com.alerdoci.ultimatepokedex.presentation.screens.splash.viewmodel
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alerdoci.ultimatepokedex.data.cache.DataStoreRepository
 import com.alerdoci.ultimatepokedex.navigation.Screen
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,5 +33,4 @@ class SplashViewModel @Inject constructor(
             _isLoading.value = false
         }
     }
-
 }

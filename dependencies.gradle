@@ -26,13 +26,15 @@ ext {
     material3Version = '1.0.1'                  // Material3
     material3WindowVersion = '1.0.1'            // Material3 Windows size
     accompanistVersion = '0.27.0'               // Accompanist / Pager and Indicators
-    accompanistSystemVersion = '0.17.0'               // Accompanist / Pager and Indicators
-    navigationComposeVersion = '2.5.0-alpha02'          // Navigation Compose
+    accompanistSystemVersion = '0.17.0'         // Accompanist / Pager and Indicators
+    navigationComposeVersion = '2.5.0-alpha02'  // Navigation Compose
     pagingComposeVersion = '1.0.0-alpha17'      // Paging 3.0
     constraintLayoutVersion = '2.1.4'           // Constraint Compose
     splashScreenVersion = '1.0.0-beta01'        // Splash Screen
     lottieVersion = '4.2.0'                     // Lottie
     dataStorePreferencesVersion = '1.0.0'       // DataStore Preferences
+    composeFoundationVersion = '1.4.0-beta02'   // Compose foundations
+    composeUiUtilsVersion = '1.4.3'             // Compose foundations
 
     //testing
     jUnitVersion = "4.13.2"
@@ -73,6 +75,8 @@ ext {
             constraintLayout       : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
             lottieXML              : "com.airbnb.android:lottie:${lottieVersion}",
             lottieCompose          : "com.airbnb.android:lottie-compose:${lottieVersion}",
+            composeFoundations     : "androidx.compose.foundation:foundation:${composeFoundationVersion}",
+            composeUiUtils         : "androidx.compose.ui:ui-util:${composeUiUtilsVersion}",
     ]
 
     appTestDependencies = [

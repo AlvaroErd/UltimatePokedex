@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.presentation.viewmodel
+package com.alerdoci.ultimatepokedex.presentation.screens.welcome.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

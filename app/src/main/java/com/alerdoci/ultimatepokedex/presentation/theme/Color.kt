@@ -63,12 +63,26 @@ val md_theme_dark_surfaceTint = Color(0xFFE7C430)
 val md_theme_dark_outlineVariant = Color(0xFF4B4639)
 val md_theme_dark_scrim = Color(0xFF000000)
 
-// Bar Colors
-//val ultimatePokedexDarkBlueStatus = Color(0xFF333A41)
+// StatusBar Colors
 val ultimatePokedexDarkBlueStatus = Color(0x22333A41)
 val ultimatePokedexLightGrayStatus = Color(0xFFDADFDF)
 
 // OnBoarding Colors
 val ColorBlue = Color(0xFF00B5EA)
 val ColorYellow = Color(0xFFFAD206)
-val ColorGreen = Color(0xFF80DD65)
+val ColorGreen = Color(0xB9073042)
+
+// Pokemon Type Colors
+val poke_black = Color(0xFF303943)
+val poke_blue = Color(0xFF429BED)
+val poke_brown = Color(0xFFB1736C)
+val poke_light_blue = Color(0xFF58ABF6)
+val poke_light_brown = Color(0xFFCA8179)
+val poke_light_purple = Color(0xFF9F5BBA)
+val poke_light_red = Color(0xFFF7786B)
+val poke_light_teal = Color(0xFF2CDAB1)
+val poke_light_yellow = Color(0xFFFFCE4B)
+val poke_purple = Color(0xFF7C538C)
+val poke_red = Color(0xFFFA6555)
+val poke_teal = Color(0xFF4FC1A6)
+val poke_yellow = Color(0xFFF6C747)

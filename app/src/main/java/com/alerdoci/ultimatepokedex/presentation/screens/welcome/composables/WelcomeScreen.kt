@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.presentation.screen
+package com.alerdoci.ultimatepokedex.presentation.screens.welcome.composables
 
 import androidx.annotation.IntRange
 import androidx.compose.animation.AnimatedVisibility
@@ -46,14 +46,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.navigation.Screen
+import com.alerdoci.ultimatepokedex.presentation.screens.welcome.viewmodel.WelcomeViewModel
 import com.alerdoci.ultimatepokedex.presentation.theme.BottomCardShape
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorBlue
+import com.alerdoci.ultimatepokedex.presentation.theme.ColorGreen
 import com.alerdoci.ultimatepokedex.presentation.theme.ColorYellow
 import com.alerdoci.ultimatepokedex.presentation.theme.dosisFont
 import com.alerdoci.ultimatepokedex.presentation.theme.pokemonFont
-import com.alerdoci.ultimatepokedex.presentation.util.LoaderIntro
-import com.alerdoci.ultimatepokedex.presentation.util.OnBoardingData
-import com.alerdoci.ultimatepokedex.presentation.viewmodel.WelcomeViewModel
+import com.alerdoci.ultimatepokedex.presentation.utils.LoaderIntro
+import com.alerdoci.ultimatepokedex.presentation.utils.OnBoardingData
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -98,7 +99,7 @@ fun WelcomeScreen(
                 "You have your order in minutes!",
                 "Easy ordering and fast transportation",
                 backgroundColor = Color(0xD30D2F41),
-                mainColor = Color(0xB9073042)
+                mainColor = ColorGreen
             )
         )
         val pagerState = rememberPagerState(
@@ -367,8 +368,6 @@ fun FinishButton(
     pagerState: PagerState,
     onClick: () -> Unit
 ) {
-//    val offset = Offset(5.0f, 10.0f)
-
     Row(
         modifier = modifier
             .padding(horizontal = 40.dp),

@@ -103,6 +103,8 @@ dependencies {
     implementation appDependencies.lottieXML
     implementation appDependencies.lottieCompose
     implementation appDependencies.accompanistPager
+    implementation appDependencies.composeFoundations
+    implementation appDependencies.composeUiUtils
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter

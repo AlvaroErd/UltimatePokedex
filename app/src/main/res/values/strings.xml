@@ -1,3 +1,22 @@
 <resources>
+    //App name
     <string name="app_name">Ultimate Pokedex</string>
+
+    //Main Screen
+    <string name="what_are_you_looking_for">What Pokémon \nare you looking for?</string>
+    <string name="types">Types</string>
+    <string name="pokedex">Pokédex</string>
+    <string name="moves">Moves</string>
+    <string name="favorites">Favorites</string>
+
+    //Error control
+    <string name="error_couldnt_reach_server">Oops! Couldn\'t reach server. \n Check your internet connection.</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong. Please try again.</string>
+    <string name="unknown_error">Unknown error</string>
+
+    //Coming Soon Screens
+    <string name="coming_soon">Coming Soon</string>
+    <string name="moves_is_not_implemented">Moves is not implemented yet :D</string>
+    <string name="favorites_is_not_implemented">Favorites is not implemented yet :D</string>
+    <string name="types_is_not_implemented">Types is not implemented yet :D</string>
 </resources>
