@@ -35,12 +35,10 @@ android {
 
     buildTypes {
         release {
-//            buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/3/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-//            buildConfigField "String", "API_BASE_URL", '"https://api.themoviedb.org/3/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -59,6 +57,11 @@ android {
     buildFeatures {
         compose true
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.0'
     }

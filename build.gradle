@@ -35,7 +35,7 @@ allprojects {
         androidApplicationId = 'com.alerdoci.ultimatepokedex'
         androidVersionCode = 1
         androidVersionName = "1.0"
-        androidMinSdkVersion = 26
+        androidMinSdkVersion = 27
         androidTargetSdkVersion = 33
         androidCompileSdkVersion = 33
     }
