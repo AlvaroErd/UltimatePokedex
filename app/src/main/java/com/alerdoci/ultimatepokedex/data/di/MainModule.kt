@@ -1,7 +1,7 @@
 package com.alerdoci.ultimatepokedex.data.di
 
 import android.content.Context
-import com.alerdoci.ultimatepokedex.data.cache.DataStoreRepository
+import com.alerdoci.ultimatepokedex.data.datasource.settings.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

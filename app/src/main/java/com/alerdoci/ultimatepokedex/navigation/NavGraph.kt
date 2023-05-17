@@ -11,11 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.alerdoci.ultimatepokedex.presentation.screens.favorites.composables.FavoritesScreen
-import com.alerdoci.ultimatepokedex.presentation.screens.home.composables.HomeScreen
-import com.alerdoci.ultimatepokedex.presentation.screens.moves.composables.MovesScreen
-import com.alerdoci.ultimatepokedex.presentation.screens.pokemontypes.composables.TypesScreen
-import com.alerdoci.ultimatepokedex.presentation.screens.welcome.composables.WelcomeScreen
+import com.alerdoci.ultimatepokedex.app.screens.favorites.composables.FavoritesScreen
+import com.alerdoci.ultimatepokedex.app.screens.home.composables.HomeScreen
+import com.alerdoci.ultimatepokedex.app.screens.moves.composables.MovesScreen
+import com.alerdoci.ultimatepokedex.app.screens.pokedex.composables.PokedexScreen
+import com.alerdoci.ultimatepokedex.app.screens.pokemontypes.composables.TypesScreen
+import com.alerdoci.ultimatepokedex.app.screens.welcome.composables.WelcomeScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalAnimationApi
@@ -50,7 +51,7 @@ fun SetupNavGraph(
                 enterTransition = slideInHorizontally() + fadeIn(),
                 exitTransition = slideOutHorizontally() + fadeOut()
             ) {
-                HomeScreen(navController = navController)
+                PokedexScreen()
             }
         }
 

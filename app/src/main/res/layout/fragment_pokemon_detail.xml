@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".presentation.screens.pokemondetail.PokemonDetailFragment">
+    tools:context=".app.screens.pokemondetail.PokemonDetailFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
