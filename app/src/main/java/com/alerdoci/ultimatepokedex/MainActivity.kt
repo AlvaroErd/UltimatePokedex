@@ -18,9 +18,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.alerdoci.ultimatepokedex.app.common.conectivity.ConnectivityObserver
 import com.alerdoci.ultimatepokedex.app.common.conectivity.NetworkConnectivityObserver
+import com.alerdoci.ultimatepokedex.app.navigation.SetupNavGraph
 import com.alerdoci.ultimatepokedex.app.screens.splash.viewmodel.SplashViewModel
 import com.alerdoci.ultimatepokedex.app.theme.UltimatePokedexTheme
-import com.alerdoci.ultimatepokedex.navigation.SetupNavGraph
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

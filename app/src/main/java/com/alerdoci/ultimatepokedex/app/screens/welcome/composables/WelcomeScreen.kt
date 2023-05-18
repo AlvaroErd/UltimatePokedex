@@ -45,16 +45,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alerdoci.ultimatepokedex.R
+import com.alerdoci.ultimatepokedex.app.navigation.Screen
+import com.alerdoci.ultimatepokedex.app.screens.welcome.utils.LoaderIntro
+import com.alerdoci.ultimatepokedex.app.screens.welcome.utils.OnBoardingData
 import com.alerdoci.ultimatepokedex.app.screens.welcome.viewmodel.WelcomeViewModel
 import com.alerdoci.ultimatepokedex.app.theme.BottomCardShape
-import com.alerdoci.ultimatepokedex.app.theme.ColorBlue
-import com.alerdoci.ultimatepokedex.app.theme.ColorGreen
-import com.alerdoci.ultimatepokedex.app.theme.ColorYellow
+import com.alerdoci.ultimatepokedex.app.theme.colorBlue
+import com.alerdoci.ultimatepokedex.app.theme.colorGreen
+import com.alerdoci.ultimatepokedex.app.theme.colorYellow
 import com.alerdoci.ultimatepokedex.app.theme.dosisFont
 import com.alerdoci.ultimatepokedex.app.theme.pokemonFont
-import com.alerdoci.ultimatepokedex.app.utils.LoaderIntro
-import com.alerdoci.ultimatepokedex.app.utils.OnBoardingData
-import com.alerdoci.ultimatepokedex.navigation.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -81,7 +81,7 @@ fun WelcomeScreen(
                 "Hello pokemon lover!",
                 "I´m Alerdoci, I hope you like the app!Cu praesent sapientem falli definiebas malorum constituam delicata. ",
                 backgroundColor = Color(0xFF87C4E3),
-                mainColor = ColorBlue
+                mainColor = colorBlue
             )
         )
         items.add(
@@ -90,7 +90,7 @@ fun WelcomeScreen(
                 "Taste a different dish every day!",
                 "Eat the food you want with a wide range of products!",
                 backgroundColor = Color(0xFFFFDF3C),
-                mainColor = ColorYellow
+                mainColor = colorYellow
             )
         )
         items.add(
@@ -99,7 +99,7 @@ fun WelcomeScreen(
                 "You have your order in minutes!",
                 "Easy ordering and fast transportation",
                 backgroundColor = Color(0xD30D2F41),
-                mainColor = ColorGreen
+                mainColor = colorGreen
             )
         )
         val pagerState = rememberPagerState(

@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.navigation
+package com.alerdoci.ultimatepokedex.app.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
@@ -84,5 +84,21 @@ fun SetupNavGraph(
                 MovesScreen()
             }
         }
+
+//        //Imagine that I create the pokemon detail with Jetpack Compose
+//        composable(route = Screen.Pokemon.route + "/{name}",
+//            arguments = listOf(
+//                navArgument("name") {
+//                    type = NavType.StringType
+//                }
+//            )
+//        ) {
+//            StartAnimation(
+//                enterTransition = scaleIn() + fadeIn(),
+//                exitTransition = scaleOut() + fadeOut()
+//            ) {
+//                PokemonDetailScreen()
+//            }
+//        }
     }
 }

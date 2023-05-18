@@ -2,7 +2,7 @@ package com.alerdoci.ultimatepokedex.app.screens.welcome.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alerdoci.ultimatepokedex.data.datasource.settings.DataStoreRepository
+import com.alerdoci.ultimatepokedex.data.cache.settings.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.app.utils
+package com.alerdoci.ultimatepokedex.app.screens.welcome.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
