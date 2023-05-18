@@ -1,7 +1,9 @@
 package com.alerdoci.ultimatepokedex.data.di
 
 import com.alerdoci.ultimatepokedex.data.datasources.remote.RemoteConstants.Companion.BASE_URL
-import com.alerdoci.ultimatepokedex.data.remote.service.PokemonService
+import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.implement.PokedexRepositoryImplement
+import com.alerdoci.ultimatepokedex.data.remote.service.PokedexService
+import com.alerdoci.ultimatepokedex.domain.repository.PokedexRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +20,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(): PokedexService {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(provideOkHttpClient())
-            .build()
+            .build().create(PokedexService::class.java)
     }
 
     @Provides
@@ -36,8 +38,9 @@ object NetworkModule {
     }
 
     @Provides
-    fun providePokemonService(retrofit: Retrofit): PokemonService {
-        return retrofit.create(PokemonService::class.java)
+    @Singleton
+    fun providePokemonRepository(remoteService: PokedexService): PokedexRepository {
+        return PokedexRepositoryImplement(remoteService)
     }
 
 }

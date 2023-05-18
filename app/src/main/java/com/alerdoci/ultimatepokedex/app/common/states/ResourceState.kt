@@ -1,4 +1,4 @@
-package com.hiberus.cursopreparacionmango.app.common.states
+package com.alerdoci.ultimatepokedex.app.common.states
 
 sealed class ResourceState<T> {
     object Idle : ResourceState<Void>()

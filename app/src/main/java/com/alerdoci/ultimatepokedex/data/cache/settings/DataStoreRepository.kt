@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.data.datasource.settings
+package com.alerdoci.ultimatepokedex.data.cache.settings
 
 import android.content.Context
 import androidx.datastore.core.DataStore
