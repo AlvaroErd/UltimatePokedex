@@ -50,6 +50,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.app.components.CardMain
+import com.alerdoci.ultimatepokedex.app.navigation.Screen
 import com.alerdoci.ultimatepokedex.app.theme.TopCardShape
 import com.alerdoci.ultimatepokedex.app.theme.UltimatePokedexTheme
 import com.alerdoci.ultimatepokedex.app.theme.dosisFont
@@ -58,7 +59,6 @@ import com.alerdoci.ultimatepokedex.app.theme.poke_light_yellow
 import com.alerdoci.ultimatepokedex.app.theme.poke_purple
 import com.alerdoci.ultimatepokedex.app.theme.poke_red
 import com.alerdoci.ultimatepokedex.app.theme.spacing
-import com.alerdoci.ultimatepokedex.navigation.Screen
 
 
 @Composable
