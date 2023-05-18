@@ -67,12 +67,12 @@ val md_theme_dark_scrim = Color(0xFF000000)
 val ultimatePokedexDarkBlueStatus = Color(0x22333A41)
 val ultimatePokedexLightGrayStatus = Color(0xFFDADFDF)
 
-// OnBoarding Colors
-val ColorBlue = Color(0xFF00B5EA)
-val ColorYellow = Color(0xFFFAD206)
-val ColorGreen = Color(0xB9073042)
+// OnBoarding colors
+val colorBlue = Color(0xFF00B5EA)
+val colorYellow = Color(0xFFFAD206)
+val colorGreen = Color(0xB9073042)
 
-// Pokemon Type Colors
+// Pokemon pastel colors
 val poke_black = Color(0xFF303943)
 val poke_blue = Color(0xFF429BED)
 val poke_brown = Color(0xFFB1736C)
@@ -86,6 +86,26 @@ val poke_purple = Color(0xFF7C538C)
 val poke_red = Color(0xFFFA6555)
 val poke_teal = Color(0xFF4FC1A6)
 val poke_yellow = Color(0xFFF6C747)
+
+//Pokemon Types
+val typeNormal = Color(0xFFA8A77A)
+val typeFire = Color(0xFFEE8130)
+val typeWater = Color(0xFF6390F0)
+val typeElectric = Color(0xFFF7D02C)
+val typeGrass = Color(0xFF7AC74C)
+val typeIce = Color(0xFF96D9D6)
+val typeFighting = Color(0xFFC22E28)
+val typePoison = Color(0xFFA33EA1)
+val typeGround = Color(0xFFE2BF65)
+val typeFlying = Color(0xFFA98FF3)
+val typePsychic = Color(0xFFF95587)
+val typeBug = Color(0xFFA6B91A)
+val typeRock = Color(0xFFB6A136)
+val typeGhost = Color(0xFF735797)
+val typeDragon = Color(0xFF6F35FC)
+val typeDark = Color(0xFF705746)
+val typeSteel = Color(0xFFB7B7CE)
+val typeFairy = Color(0xFFD685AD)
 
 // Resource Colors
 val black = Color(0xFF000000)

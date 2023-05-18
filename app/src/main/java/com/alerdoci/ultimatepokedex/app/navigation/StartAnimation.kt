@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.navigation
+package com.alerdoci.ultimatepokedex.app.navigation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition

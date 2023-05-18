@@ -88,6 +88,7 @@ dependencies {
     implementation appDependencies.hiltCompose
     kapt appDependencies.kapt
     implementation appDependencies.coil
+    implementation appDependencies.coilGif
     implementation appDependencies.material3
     implementation appDependencies.material3Window
     implementation appDependencies.accompanist
@@ -108,6 +109,8 @@ dependencies {
     implementation appDependencies.accompanistPager
     implementation appDependencies.composeFoundations
     implementation appDependencies.composeUiUtils
+    implementation appDependencies.palette
+
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitConverter

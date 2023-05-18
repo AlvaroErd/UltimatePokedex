@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alerdoci.ultimatepokedex.app.theme.ColorBlue
+import com.alerdoci.ultimatepokedex.app.theme.colorBlue
 import com.alerdoci.ultimatepokedex.app.theme.spacing
 
 @Composable
@@ -40,7 +40,7 @@ fun CardMain(
         fontWeight = FontWeight.Bold,
         color = MaterialTheme.colorScheme.onBackground
     ),
-    backgroundColor: Color = ColorBlue,
+    backgroundColor: Color = colorBlue,
     shape: Shape = RoundedCornerShape(16.dp),
     imageSize: Dp = 80.dp,
     imageAlpha: Float = 0.2f,

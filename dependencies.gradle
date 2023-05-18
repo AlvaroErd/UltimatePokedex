@@ -19,10 +19,11 @@ ext {
     gsonVersion = '2.10.1'                      // Gson for retrofit
     okHttpVersion = '4.10.0'                    // OkHttp
     coroutinesVersion = ' 1.6.1'                // Coroutines
-    hiltVersion = '2.44'                        // Hilt
+    hiltVersion = '2.45'                        // Hilt
     kaptVersion = '2.44'                        // Hilt Compiler
     hiltComposeVersion = '1.0.0'                // Hilt Compiler
-    coilVersion = '2.2.2'                       // Coil
+    coilVersion = '2.3.0'                       // Coil
+    coilGifVersion = '2.3.0'                    // Coil Gif
     material3Version = '1.0.1'                  // Material3
     material3WindowVersion = '1.0.1'            // Material3 Windows size
     accompanistVersion = '0.27.0'               // Accompanist / Pager and Indicators
@@ -35,6 +36,7 @@ ext {
     dataStorePreferencesVersion = '1.0.0'       // DataStore Preferences
     composeFoundationVersion = '1.4.0-beta02'   // Compose foundations
     composeUiUtilsVersion = '1.4.3'             // Compose foundations
+    paletteVersion = '1.0.0'                    // Palette Color
 
     //testing
     jUnitVersion = "4.13.2"
@@ -58,6 +60,7 @@ ext {
             hiltCompose            : "androidx.hilt:hilt-navigation-compose:${hiltComposeVersion}",
             kapt                   : "com.google.dagger:hilt-android-compiler:${kaptVersion}",
             coil                   : "io.coil-kt:coil-compose:${coilVersion}",
+            coilGif                : "io.coil-kt:coil-gif:${coilGifVersion}",
             material3              : "androidx.compose.material3:material3:${material3Version}",
             material3Window        : "androidx.compose.material3:material3-window-size-class:${material3WindowVersion}",
             accompanist            : "com.google.accompanist:accompanist-systemuicontroller:${accompanistSystemVersion}",
@@ -77,6 +80,7 @@ ext {
             lottieCompose          : "com.airbnb.android:lottie-compose:${lottieVersion}",
             composeFoundations     : "androidx.compose.foundation:foundation:${composeFoundationVersion}",
             composeUiUtils         : "androidx.compose.ui:ui-util:${composeUiUtilsVersion}",
+            palette                : "androidx.palette:palette:${paletteVersion}",
     ]
 
     appTestDependencies = [

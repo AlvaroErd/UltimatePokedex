@@ -16,3 +16,11 @@ val BottomCardShape = Shapes(
 val TopCardShape = Shapes(
     large = RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp)
 )
+val AllCardShape = Shapes(
+    large = RoundedCornerShape(
+        bottomStart = 40.dp,
+        topStart = 40.dp,
+        topEnd = 40.dp,
+        bottomEnd = 40.dp
+    )
+)
