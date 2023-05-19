@@ -79,7 +79,7 @@ fun WelcomeScreen(
             OnBoardingData(
                 R.raw.lottie_hello_squirtle,
                 "Hello pokemon lover!",
-                "I´m Alerdoci, I hope you like the app!Cu praesent sapientem falli definiebas malorum constituam delicata. ",
+                "Welcome to my application about the Pokemon world! I hope you enjoy it",
                 backgroundColor = Color(0xFF87C4E3),
                 mainColor = colorBlue
             )
@@ -87,8 +87,8 @@ fun WelcomeScreen(
         items.add(
             OnBoardingData(
                 R.raw.lottie_boy_developer_laptop,
-                "Taste a different dish every day!",
-                "Eat the food you want with a wide range of products!",
+                "I'm Alerdoci \n Mobile developer based in Spain",
+                "This application has the purpose of demonstrating my knowledge about the Android world",
                 backgroundColor = Color(0xFFFFDF3C),
                 mainColor = colorYellow
             )
@@ -96,8 +96,8 @@ fun WelcomeScreen(
         items.add(
             OnBoardingData(
                 R.raw.lottie_android_jetpack,
-                "You have your order in minutes!",
-                "Easy ordering and fast transportation",
+                "Jetpack Compose POWER!",
+                "Developed with Kotlin, J.C., Hilt, Retrofit, Material 3 and much more. Let's the show begin!",
                 backgroundColor = Color(0xD30D2F41),
                 mainColor = colorGreen
             )
@@ -187,7 +187,7 @@ fun OnBoardingPager(
                                         modifier = Modifier.padding(
                                             top = 20.dp,
                                             start = 40.dp,
-                                            end = 20.dp
+                                            end = 40.dp
                                         ),
                                         color = Color.Gray,
                                         fontFamily = dosisFont,
