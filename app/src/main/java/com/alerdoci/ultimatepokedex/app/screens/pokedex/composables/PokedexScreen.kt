@@ -20,11 +20,12 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,31 +40,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.ImageLoader
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.app.common.extensions.Extensions.capitalized
+import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
 import com.alerdoci.ultimatepokedex.app.components.ImageGif
 import com.alerdoci.ultimatepokedex.app.components.PokemonName
 import com.alerdoci.ultimatepokedex.app.components.PokemonNumber
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.PokedexViewModel
-import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.pokedexMock
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.pokemonMock1
 import com.alerdoci.ultimatepokedex.app.theme.TopCardShape
 import com.alerdoci.ultimatepokedex.app.theme.blue_grey_800
 import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPokedex
 
 @Composable
-fun PokedexScreen(viewModel: PokedexViewModel = hiltViewModel()) {
+fun PokedexScreen(onItemClick: (String) -> Unit) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     )
     {
-        val pokedexListData by viewModel.pokedexFlow.collectAsState()
-
         Column() {
             Card(
                 modifier = Modifier
@@ -91,19 +91,29 @@ fun PokedexScreen(viewModel: PokedexViewModel = hiltViewModel()) {
                 horizontalAlignment = CenterHorizontally,
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    PokedexList(pokedexListData, onItemClick = {})
+                    PokedexList(onItemClick = onItemClick)
                 }
             }
         }
     }
 }
 
-
 @Composable
 fun PokedexList(
-    pokedexList: List<ModelListPokedex>,
-    onItemClick: (pokemonId: String) -> Unit,
+    viewModel: PokedexViewModel = hiltViewModel(),
+    onItemClick: (pokemonName: String) -> Unit,
 ) {
+    val pokedexListState by viewModel.pokedex.collectAsStateWithLifecycle()
+    var items by remember { mutableStateOf<List<ModelListPokedex>>(emptyList()) }
+
+    when (pokedexListState) {
+        is ResourceState.Loading -> CircularProgressIndicator()
+        is ResourceState.Error -> Text(text = "Error")
+        is ResourceState.Success -> items =
+            (pokedexListState as ResourceState.Success).data as List<ModelListPokedex>
+
+        else -> Text(text = "Algo ha ido mal")
+    }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
@@ -113,17 +123,17 @@ fun PokedexList(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.Center,
     ) {
-        items(pokedexList) { item ->
-            PokemonCard(item) {
-                onItemClick(item.pokemonId)
-            }
+        items(items) { pokemonItem ->
+            println("Pokemon name (his ID): ${pokemonItem.name}")
+            PokemonCard(pokemon = pokemonItem, onItemClick = onItemClick)
         }
     }
 }
 
+
 @Composable
 fun PokemonCard(
-    item: ModelListPokedex,
+    pokemon: ModelListPokedex,
     modifier: Modifier = Modifier,
     viewModel: PokedexViewModel = hiltViewModel(),
     onItemClick: (pokemonId: String) -> Unit
@@ -140,12 +150,13 @@ fun PokemonCard(
             .aspectRatio(1f)
             .background(dominantColor)
             .clickable {
-                onItemClick(item.pokemonId)
+                onItemClick(pokemon.name)
             },
     ) {
         Column {
             val imageLoader = ImageLoader(LocalContext.current)
-            val req = ImageRequest.Builder(LocalContext.current).data(item.imageUrl).crossfade(true)
+            val req = ImageRequest.Builder(LocalContext.current).data(pokemon.imageUrl)
+                .crossfade(true)
                 .build()
             LaunchedEffect(key1 = "fetchColors") {
                 val drawable = imageLoader.execute(req).drawable
@@ -159,7 +170,7 @@ fun PokemonCard(
             val painterState = painter.state
             Image(
                 painter = painter,
-                contentDescription = item.name,
+                contentDescription = pokemon.name,
                 modifier = Modifier
                     .size(120.dp)
                     .align(CenterHorizontally)
@@ -173,8 +184,8 @@ fun PokemonCard(
                     )
                 }
             }
-            PokemonNumber(number = item.pokemonId)
-            PokemonName(text = item.name.capitalized())
+            PokemonNumber(number = pokemon.pokemonNumber)
+            PokemonName(text = pokemon.name.capitalized())
         }
     }
 }
@@ -183,20 +194,56 @@ fun PokemonCard(
 @Preview("Light Theme", showBackground = true)
 @Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
-fun BoxPokemonPreview() {
-    PokedexList(pokedexList = pokedexMock, onItemClick = {})
+fun PokedexListPreview() {
+//        PokedexList(pokedexList = pokedexMock, onItemClick = {})
 }
 
 @Preview("Light Theme", showBackground = true)
 @Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun PokemonCardPreview() {
-    PokemonCard(item = pokemonMock1, onItemClick = {})
+    PokemonCard(pokemon = pokemonMock1, onItemClick = {})
 }
 
 @Preview("Light Theme", showBackground = true)
 @Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun PokedexScreenPreview() {
-    PokedexScreen()
+    PokedexScreen(onItemClick = {})
 }
+
+
+//    (pokedexListState as ResourceState.Success).data as List<ModelListPokedex>
+
+//
+//@Composable
+//fun PokedexList(
+//    pokedexList: List<ModelListPokedex>,
+//    onItemClick: (pokemonName: String) -> Unit,
+//) {
+//    val appContext = LocalContext.current
+//
+//    LazyVerticalGrid(
+//        columns = GridCells.Fixed(2),
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(10.dp),
+//        contentPadding = PaddingValues(all = 4.dp),
+//        horizontalArrangement = Arrangement.spacedBy(10.dp),
+//        verticalArrangement = Arrangement.Center,
+//    ) {
+//        items(pokedexList) { pokemonItem ->
+//
+//            println("Pokemon name (his ID): ${pokemonItem.name}")
+//
+//            PokemonCard(pokemon = pokemonItem) { pokemonClicked ->
+//                appContext.startActivity(
+//                    Intent(appContext, PokemonActivity::class.java).apply {
+//                        putExtra("pokemonName", pokemonClicked.name)
+//                    }
+//                )
+//                onItemClick(pokemonItem.name)
+//            }
+//        }
+//    }
+//}

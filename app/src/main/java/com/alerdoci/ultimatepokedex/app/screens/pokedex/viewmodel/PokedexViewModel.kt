@@ -29,17 +29,6 @@ class PokedexViewModel @Inject constructor(
     val pokedex: StateFlow<ResourceState<*>>
         get() = _pokedex
 
-    private val _loading: MutableStateFlow<Boolean> by lazy { MutableStateFlow(true) }
-    val loading: StateFlow<Boolean> get() = _loading
-
-    private val _pokedexFlow: MutableStateFlow<List<ModelListPokedex>> by lazy {
-        MutableStateFlow(
-            listOf()
-        )
-    }
-    val pokedexFlow: StateFlow<List<ModelListPokedex>>
-        get() = _pokedexFlow
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             loadPokedex()
@@ -55,13 +44,11 @@ class PokedexViewModel @Inject constructor(
                     else
                         _pokedex.update { ResourceState.Error(throwable) }
                 }
-                .collectLatest { pokedex ->
-                    _pokedex.update { ResourceState.Success(_pokedexFlow.update { pokedex }) }
-//                    _pokedex.update { ResourceState.Success(pokedex.sortedBy { pokemon -> pokemon.pokemonId }) }
+                .collectLatest {
+                    _pokedex.update { ResourceState.Success(pokedex) }
                 }
         }
     }
-
 
     fun calculateDominantColor(drawable: Drawable, onFinish: (Color) -> Unit) {
         val bmp = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
@@ -75,22 +62,22 @@ class PokedexViewModel @Inject constructor(
 
 //Mock
 val pokemonMock1 = ModelListPokedex(
-    name = "Almudena",
+    name = "Bolbasor",
     url = "",
-    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
-    pokemonId = "I love u"
+    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    pokemonNumber = "1"
 )
 val pokemonMock2 = ModelListPokedex(
     name = "Ivisor",
     url = "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
-    pokemonId = "2"
+    pokemonNumber = "2"
 )
 val pokemonMock3 = ModelListPokedex(
     name = "Venosor",
     url = "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
-    pokemonId = "3"
+    pokemonNumber = "3"
 )
 
 var pokedexMock = listOf(
