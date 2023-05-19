@@ -1,4 +1,4 @@
-package com.alerdoci.ultimatepokedex.data.datasources.remote
+package com.alerdoci.ultimatepokedex.data.remote.constants
 
 class RemoteConstants {
     companion object {
