@@ -51,7 +51,7 @@ fun SetupNavGraph(
                 enterTransition = slideInHorizontally() + fadeIn(),
                 exitTransition = slideOutHorizontally() + fadeOut()
             ) {
-                PokedexScreen()
+                PokedexScreen(onItemClick = { })
             }
         }
 

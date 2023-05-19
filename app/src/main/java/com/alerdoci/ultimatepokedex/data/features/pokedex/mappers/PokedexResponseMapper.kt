@@ -17,5 +17,5 @@ fun PokedexResultResponse.toDomain(): ModelListPokedex = ModelListPokedex(
     name = this.name,
     url = this.url,
     imageUrl = this.getImageUrl(),
-    pokemonId = this.getId()
+    pokemonNumber = this.getPokemonNumber()
 )

@@ -37,6 +37,7 @@ ext {
     composeFoundationVersion = '1.4.0-beta02'   // Compose foundations
     composeUiUtilsVersion = '1.4.3'             // Compose foundations
     paletteVersion = '1.0.0'                    // Palette Color
+    lifecyleRuntimeVersion = '2.6.0'            // Lifectle Runtime Compose
 
     //testing
     jUnitVersion = "4.13.2"
@@ -81,6 +82,7 @@ ext {
             composeFoundations     : "androidx.compose.foundation:foundation:${composeFoundationVersion}",
             composeUiUtils         : "androidx.compose.ui:ui-util:${composeUiUtilsVersion}",
             palette                : "androidx.palette:palette:${paletteVersion}",
+            lifecyleRuntime        : "androidx.lifecycle:lifecycle-runtime-compose:${lifecyleRuntimeVersion}",
     ]
 
     appTestDependencies = [

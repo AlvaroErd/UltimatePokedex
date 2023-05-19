@@ -1,6 +1,6 @@
 package com.alerdoci.ultimatepokedex.data.features.pokemon.mappers
 
-import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.PokemonResponse
+import com.alerdoci.ultimatepokedex.data.features.pokemon.remote.model.PokemonResponse
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemon
 
 fun PokemonResponse.toDomain(): ModelPokemon = ModelPokemon(

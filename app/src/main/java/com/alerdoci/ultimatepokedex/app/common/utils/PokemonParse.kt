@@ -19,7 +19,7 @@ import com.alerdoci.ultimatepokedex.app.theme.typePsychic
 import com.alerdoci.ultimatepokedex.app.theme.typeRock
 import com.alerdoci.ultimatepokedex.app.theme.typeSteel
 import com.alerdoci.ultimatepokedex.app.theme.typeWater
-import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.Type
+import com.alerdoci.ultimatepokedex.data.features.pokemon.remote.model.Type
 import java.util.Locale
 
 fun parseTypeToColor(type: Type): Color {

@@ -1,7 +1,7 @@
 package com.alerdoci.ultimatepokedex.data.di
 
-import com.alerdoci.ultimatepokedex.data.datasources.remote.RemoteConstants.Companion.BASE_URL
 import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.implement.PokedexRepositoryImplement
+import com.alerdoci.ultimatepokedex.data.remote.constants.RemoteConstants.Companion.BASE_URL
 import com.alerdoci.ultimatepokedex.data.remote.service.PokedexService
 import com.alerdoci.ultimatepokedex.domain.repository.PokedexRepository
 import dagger.Module

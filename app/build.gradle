@@ -110,6 +110,7 @@ dependencies {
     implementation appDependencies.composeFoundations
     implementation appDependencies.composeUiUtils
     implementation appDependencies.palette
+    implementation appDependencies.lifecyleRuntime
 
 
     implementation dataDependencies.retrofit
