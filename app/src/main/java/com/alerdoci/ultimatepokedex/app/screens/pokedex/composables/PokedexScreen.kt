@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -107,12 +108,18 @@ fun PokedexList(
     var items by remember { mutableStateOf<List<ModelListPokedex>>(emptyList()) }
 
     when (pokedexListState) {
-        is ResourceState.Loading -> CircularProgressIndicator()
+        is ResourceState.Loading -> Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CircularProgressIndicator()
+        }
         is ResourceState.Error -> Text(text = "Error")
         is ResourceState.Success -> items =
             (pokedexListState as ResourceState.Success).data as List<ModelListPokedex>
 
-        else -> Text(text = "Algo ha ido mal")
+        else -> { }
     }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),

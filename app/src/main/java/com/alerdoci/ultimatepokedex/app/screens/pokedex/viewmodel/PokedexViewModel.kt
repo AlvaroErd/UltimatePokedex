@@ -12,6 +12,7 @@ import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPoke
 import com.alerdoci.ultimatepokedex.domain.usecases.GetPokedexUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -39,13 +40,15 @@ class PokedexViewModel @Inject constructor(
         if (_pokedex.compareAndSet(ResourceState.Idle, ResourceState.Loading(""))) {
             getPokedexUseCase()
                 .onCompletion { throwable ->
-                    if (throwable == null)
+                    if (throwable == null) {
+                        delay(1500)
                         _pokedex.update { ResourceState.Idle }
+                    }
                     else
                         _pokedex.update { ResourceState.Error(throwable) }
                 }
-                .collectLatest {
-                    _pokedex.update { ResourceState.Success(pokedex) }
+                .collectLatest {pokedexList ->
+                    _pokedex.update { ResourceState.Success(pokedexList) }
                 }
         }
     }
