@@ -39,9 +39,8 @@ class PokemonFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         this.binding = FragmentPokemonBinding.inflate(inflater)
-
+        viewModel.loadPokemon(pokemonName)
         return this.binding!!.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,38 +54,22 @@ class PokemonFragment : Fragment() {
                         is ResourceState.Success -> {
                             currentPokemon = pokemonState.data as ModelPokemon
                             withContext(Dispatchers.Main) {
-                                loadPokemon()
+                                loadPokemon(pokemonName)
                             }
                         }
 
-                        is ResourceState.Error -> {
-
-                        }
-
+                        is ResourceState.Error -> {}
                         else -> {}
                     }
-
                 }
             }
         }
     }
 
-//    lifecycleScope.launch(Dispatchers.IO)
-//    {
-//        repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//            this@PokemonFragment.viewModel.loadPokemon().collectLatest { detailId ->
-//                withContext(Dispatchers.Main)
-//                {
-//                    binding.tv.text = pokemonName
-//                }
-//            }
-//        }
-//    }
-
-    private fun loadPokemon() {
+    private fun loadPokemon(pokemonName: String) {
         this.binding?.apply {
             val imageLoader = ImageLoader(requireContext())
-
+            this.tv.text = currentPokemon?.name
         }
     }
 
@@ -95,6 +78,4 @@ class PokemonFragment : Fragment() {
         this.binding = null
         this.currentPokemon = null
     }
-
-
 }

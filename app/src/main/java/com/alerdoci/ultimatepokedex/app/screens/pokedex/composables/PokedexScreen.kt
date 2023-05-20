@@ -201,13 +201,6 @@ fun PokemonCard(
 @Preview("Light Theme", showBackground = true)
 @Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
-fun PokedexListPreview() {
-//        PokedexList(pokedexList = pokedexMock, onItemClick = {})
-}
-
-@Preview("Light Theme", showBackground = true)
-@Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
 fun PokemonCardPreview() {
     PokemonCard(pokemon = pokemonMock1, onItemClick = {})
 }
@@ -218,39 +211,3 @@ fun PokemonCardPreview() {
 fun PokedexScreenPreview() {
     PokedexScreen(onItemClick = {})
 }
-
-
-//    (pokedexListState as ResourceState.Success).data as List<ModelListPokedex>
-
-//
-//@Composable
-//fun PokedexList(
-//    pokedexList: List<ModelListPokedex>,
-//    onItemClick: (pokemonName: String) -> Unit,
-//) {
-//    val appContext = LocalContext.current
-//
-//    LazyVerticalGrid(
-//        columns = GridCells.Fixed(2),
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(10.dp),
-//        contentPadding = PaddingValues(all = 4.dp),
-//        horizontalArrangement = Arrangement.spacedBy(10.dp),
-//        verticalArrangement = Arrangement.Center,
-//    ) {
-//        items(pokedexList) { pokemonItem ->
-//
-//            println("Pokemon name (his ID): ${pokemonItem.name}")
-//
-//            PokemonCard(pokemon = pokemonItem) { pokemonClicked ->
-//                appContext.startActivity(
-//                    Intent(appContext, PokemonActivity::class.java).apply {
-//                        putExtra("pokemonName", pokemonClicked.name)
-//                    }
-//                )
-//                onItemClick(pokemonItem.name)
-//            }
-//        }
-//    }
-//}

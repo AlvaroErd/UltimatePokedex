@@ -11,6 +11,6 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hola" />
+        android:text="Aqui debe ir el nombre del pokemon" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
