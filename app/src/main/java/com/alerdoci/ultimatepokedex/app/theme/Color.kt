@@ -110,7 +110,7 @@ val typeFairy = Color(0xFFD685AD)
 // Resource Colors
 val black = Color(0xFF000000)
 val white = Color(0xFFFFFFFF)
-val transparent = Color(0xFFFFFFFF)
+val transparent = Color(0x00FFFFFF)
 
 // Reds
 val red_50 = Color(0xFFFFEBEE)
