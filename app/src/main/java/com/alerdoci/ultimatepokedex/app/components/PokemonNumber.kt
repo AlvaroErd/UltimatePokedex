@@ -1,6 +1,5 @@
 package com.alerdoci.ultimatepokedex.app.components
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,7 +29,6 @@ fun PokemonNumber(number: String) {
 }
 
 @Preview("Light Theme", showBackground = true)
-@Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun PokemonNumberPreview() {
     PokemonNumber(number = "127")

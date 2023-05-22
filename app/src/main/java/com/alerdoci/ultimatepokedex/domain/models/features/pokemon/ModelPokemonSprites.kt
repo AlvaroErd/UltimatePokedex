@@ -1,5 +1,5 @@
 package com.alerdoci.ultimatepokedex.domain.models.features.pokemon
 
-data class Sprites(
-    val other: Other,
+data class ModelPokemonSprites(
+    val other: ModelPokemonOther?,
 )

@@ -37,7 +37,7 @@ ext {
     composeFoundationVersion = '1.4.0-beta02'   // Compose foundations
     composeUiUtilsVersion = '1.4.3'             // Compose foundations
     paletteVersion = '1.0.0'                    // Palette Color
-    lifecyleRuntimeVersion = '2.6.0'            // Lifectle Runtime Compose
+    lifecyleRuntimeVersion = '2.6.0'            // Lifecycle Runtime Compose
 
     //testing
     jUnitVersion = "4.13.2"

@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import coil.load
+import com.alerdoci.ultimatepokedex.app.common.extensions.Extensions.capitalized
 import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
 import com.alerdoci.ultimatepokedex.app.screens.pokemon.viewmodel.PokemonViewModel
 import com.alerdoci.ultimatepokedex.databinding.FragmentPokemonBinding
@@ -54,9 +55,10 @@ class PokemonFragment : Fragment() {
                         is ResourceState.Success -> {
                             currentPokemon = pokemonState.data as ModelPokemon
                             withContext(Dispatchers.Main) {
-                                loadPokemon(pokemon = ModelPokemon())
+                                loadPokemon()
                             }
                         }
+
                         is ResourceState.Error -> {}
                         else -> {}
                     }
@@ -65,46 +67,44 @@ class PokemonFragment : Fragment() {
         }
     }
 
-    private fun loadPokemon(pokemon: ModelPokemon) {
+    private fun loadPokemon() {
         this.binding?.apply {
 
-            this.tvName.text = pokemon.name
-            this.tvId.text = pokemon.id.toString()
+            this.tvName.text = currentPokemon?.name?.capitalized()!!
+            this.tvId.text = currentPokemon?.id.toString()
+            this.ivPokemonImage.load(currentPokemon)
 
-            this.ivPokemonImage.load(pokemon.sprites.other.official_artwork.front_default)
-            this.ivBackgroundImage    //Add tint in base at type
+            //this.ivPokemonImage.load(currentPokemon.sprites[0].other[0].official_artwork[0].front_default)
+//            this.ivBackgroundImage    //Add tint in base at type
 
-            this.tvType1.text = pokemon.types[1].type.name
+//            this.tvType1.text = currentPokemon?.types?.get(1)?.type.name
+//
+//            if (currentPokemon?.types.size > 1) {
+//                tvType2.text = currentPokemon?.types?.get(1)?.type.name
+//                tvType2.visibility = View.VISIBLE
+//            } else {
+//                tvType2.visibility = View.GONE
+//            }
 
-            if (pokemon.types.size > 1) {
-                tvType2.text = pokemon.types[1].type.name
-                tvType2.visibility = View.VISIBLE
-            } else {
-                tvType2.visibility = View.GONE
-            }
+//            this.tvDescription.text = currentPokemon.description
+//            this.tvHeight.text = currentPokemon.height.toString()
+//            this.textViewWeight.text = currentPokemon.weight.toString()
 
-            this.tvDescription.text = pokemon.description
-
-            this.tvHeight.text = pokemon.height.toString()
-            this.textViewWeight.text = pokemon.weight.toString()
-
-
-            this.tvHp.text = pokemon.stats[0].base_stats.toString()
-            this.tvAttack.text = pokemon.stats[1].base_stats.toString()
-            this.tvDefense.text = pokemon.stats[2].base_stats.toString()
-            this.tvSpAtk.text = pokemon.stats[3].base_stats.toString()
-            this.tvSpDef.text = pokemon.stats[4].base_stats.toString()
-            this.tvSpeed.text = pokemon.stats[5].base_stats.toString()
-            this.tvTotal.text = pokemon.stats[6].base_stats.toString()
-
-            pbHp.progress = pokemon.stats[0].base_stats
-            pbAttack.progress = pokemon.stats[1].base_stats
-            pbDefense.progress = pokemon.stats[2].base_stats
-            pbSpAtk.progress = pokemon.stats[3].base_stats
-            pbSpDef.progress = pokemon.stats[4].base_stats
-            pbSpeed.progress = pokemon.stats[5].base_stats
-            pbTotal.progress = pokemon.stats[6].base_stats
-
+//            this.tvHp.text = currentPokemon.stats[0].base_stats.toString()
+//            this.tvAttack.text = currentPokemon.stats[1].base_stats.toString()
+//            this.tvDefense.text = currentPokemon.stats[2].base_stats.toString()
+//            this.tvSpAtk.text = currentPokemon.stats[3].base_stats.toString()
+//            this.tvSpDef.text = currentPokemon.stats[4].base_stats.toString()
+//            this.tvSpeed.text = currentPokemon.stats[5].base_stats.toString()
+//            this.tvTotal.text = currentPokemon.stats[6].base_stats.toString()
+//
+//            pbHp.progress = currentPokemon.stats[0].base_stats!!
+//            pbAttack.progress = currentPokemon.stats[1].base_stats!!
+//            pbDefense.progress = currentPokemon.stats[2].base_stats!!
+//            pbSpAtk.progress = currentPokemon.stats[3].base_stats!!
+//            pbSpDef.progress = currentPokemon.stats[4].base_stats!!
+//            pbSpeed.progress = currentPokemon.stats[5].base_stats!!
+//            pbTotal.progress = currentPokemon.stats[6].base_stats!!
         }
     }
 

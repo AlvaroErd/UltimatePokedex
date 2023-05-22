@@ -1,6 +1,6 @@
 package com.alerdoci.ultimatepokedex.domain.models.features.pokemon
 
-data class TypeResponse(
-    val slot: Int,
-    val type: Type
+data class ModelPokemonTypeResponse(
+    val slot: Int? = null,
+    val type: List<ModelPokemonType>
 )

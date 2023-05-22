@@ -1,6 +1,5 @@
 package com.alerdoci.ultimatepokedex.app.components
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,8 +28,7 @@ fun PokemonName(text: String) {
 }
 
 @Preview("Light Theme", showBackground = true)
-@Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun PokemonNamePreview() {
-    PokemonName(text = "Psyaaaaydack")
+    PokemonName(text = "Psaaaaydack")
 }

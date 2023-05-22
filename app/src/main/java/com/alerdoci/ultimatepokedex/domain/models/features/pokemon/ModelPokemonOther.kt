@@ -1,5 +1,5 @@
 package com.alerdoci.ultimatepokedex.domain.models.features.pokemon
 
-data class Other(
-    val official_artwork: OfficialArtwork
+data class ModelPokemonOther(
+    val official_artwork: ModelPokemonOfficialArtwork?
 )
