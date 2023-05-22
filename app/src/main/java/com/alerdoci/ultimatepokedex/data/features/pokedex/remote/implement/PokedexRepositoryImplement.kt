@@ -3,7 +3,7 @@ package com.alerdoci.ultimatepokedex.data.features.pokedex.remote.implement
 import com.alerdoci.ultimatepokedex.data.features.pokedex.mappers.toDomain
 import com.alerdoci.ultimatepokedex.data.features.pokemon.mappers.toDomain
 import com.alerdoci.ultimatepokedex.data.remote.service.PokedexService
-import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPokedex
+import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemon
 import com.alerdoci.ultimatepokedex.domain.repository.PokedexRepository
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +16,7 @@ open class PokedexRepositoryImplement @Inject constructor(
     private val remoteService: PokedexService,
 ) : PokedexRepository {
 
-    override suspend fun getPokedex(limit: Int, offset: Int): Flow<List<ModelListPokedex>> = flow {
+    override suspend fun getPokedex(limit: Int, offset: Int): Flow<List<ModelPokedexList>> = flow {
         val pokedex = remoteService.getPokedex(limit, offset)
 
         if (pokedex.isSuccessful) {

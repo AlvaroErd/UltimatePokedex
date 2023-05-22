@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import coil.ImageLoader
+import coil.load
 import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
 import com.alerdoci.ultimatepokedex.app.screens.pokemon.viewmodel.PokemonViewModel
 import com.alerdoci.ultimatepokedex.databinding.FragmentPokemonBinding
@@ -54,10 +54,9 @@ class PokemonFragment : Fragment() {
                         is ResourceState.Success -> {
                             currentPokemon = pokemonState.data as ModelPokemon
                             withContext(Dispatchers.Main) {
-                                loadPokemon(pokemonName)
+                                loadPokemon(pokemon = ModelPokemon())
                             }
                         }
-
                         is ResourceState.Error -> {}
                         else -> {}
                     }
@@ -66,10 +65,46 @@ class PokemonFragment : Fragment() {
         }
     }
 
-    private fun loadPokemon(pokemonName: String) {
+    private fun loadPokemon(pokemon: ModelPokemon) {
         this.binding?.apply {
-            val imageLoader = ImageLoader(requireContext())
-            this.tv.text = currentPokemon?.name
+
+            this.tvName.text = pokemon.name
+            this.tvId.text = pokemon.id.toString()
+
+            this.ivPokemonImage.load(pokemon.sprites.other.official_artwork.front_default)
+            this.ivBackgroundImage    //Add tint in base at type
+
+            this.tvType1.text = pokemon.types[1].type.name
+
+            if (pokemon.types.size > 1) {
+                tvType2.text = pokemon.types[1].type.name
+                tvType2.visibility = View.VISIBLE
+            } else {
+                tvType2.visibility = View.GONE
+            }
+
+            this.tvDescription.text = pokemon.description
+
+            this.tvHeight.text = pokemon.height.toString()
+            this.textViewWeight.text = pokemon.weight.toString()
+
+
+            this.tvHp.text = pokemon.stats[0].base_stats.toString()
+            this.tvAttack.text = pokemon.stats[1].base_stats.toString()
+            this.tvDefense.text = pokemon.stats[2].base_stats.toString()
+            this.tvSpAtk.text = pokemon.stats[3].base_stats.toString()
+            this.tvSpDef.text = pokemon.stats[4].base_stats.toString()
+            this.tvSpeed.text = pokemon.stats[5].base_stats.toString()
+            this.tvTotal.text = pokemon.stats[6].base_stats.toString()
+
+            pbHp.progress = pokemon.stats[0].base_stats
+            pbAttack.progress = pokemon.stats[1].base_stats
+            pbDefense.progress = pokemon.stats[2].base_stats
+            pbSpAtk.progress = pokemon.stats[3].base_stats
+            pbSpDef.progress = pokemon.stats[4].base_stats
+            pbSpeed.progress = pokemon.stats[5].base_stats
+            pbTotal.progress = pokemon.stats[6].base_stats
+
         }
     }
 
