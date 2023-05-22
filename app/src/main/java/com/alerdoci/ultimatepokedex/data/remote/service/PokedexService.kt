@@ -1,7 +1,7 @@
 package com.alerdoci.ultimatepokedex.data.remote.service
 
-import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.PokedexResponse
-import com.alerdoci.ultimatepokedex.data.features.pokemon.remote.model.PokemonResponse
+import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.RemotePokedex
+import com.alerdoci.ultimatepokedex.data.features.pokemon.remote.model.RemotePokemon
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,10 +13,10 @@ interface PokedexService {
     suspend fun getPokedex(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): Response<PokedexResponse>
+    ): Response<RemotePokedex>
 
     @GET("pokemon/{name}")
     suspend fun getPokemon(
         @Path("name") pokemonName: String
-    ): Response<PokemonResponse>
+    ): Response<RemotePokemon>
 }

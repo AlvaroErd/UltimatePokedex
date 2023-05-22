@@ -23,7 +23,7 @@ import com.alerdoci.ultimatepokedex.data.features.pokemon.remote.model.Type
 import java.util.Locale
 
 fun parseTypeToColor(type: Type): Color {
-    return when (type.type.name.lowercase(Locale.ROOT)) {
+    return when (type.name.lowercase(Locale.ROOT)) {
         "normal" -> typeNormal
         "fire" -> typeFire
         "water" -> typeWater

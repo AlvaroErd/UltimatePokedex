@@ -1,11 +1,11 @@
 package com.alerdoci.ultimatepokedex.data.features.pokedex.mappers
 
-import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.PokedexResponse
 import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.PokedexResultResponse
-import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPokedex
+import com.alerdoci.ultimatepokedex.data.features.pokedex.remote.model.RemotePokedex
 import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedex
+import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 
-fun PokedexResponse.toDomain(): ModelPokedex = ModelPokedex(
+fun RemotePokedex.toDomain(): ModelPokedex = ModelPokedex(
     //domain <= data
     count = this.count,
     next = this.next,
@@ -13,7 +13,7 @@ fun PokedexResponse.toDomain(): ModelPokedex = ModelPokedex(
     results = this.results.map { it.toDomain() },
 )
 
-fun PokedexResultResponse.toDomain(): ModelListPokedex = ModelListPokedex(
+fun PokedexResultResponse.toDomain(): ModelPokedexList = ModelPokedexList(
     name = this.name,
     url = this.url,
     imageUrl = this.getImageUrl(),

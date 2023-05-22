@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
-import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPokedex
+import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 import com.alerdoci.ultimatepokedex.domain.usecases.GetPokedexUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -64,19 +64,19 @@ class PokedexViewModel @Inject constructor(
 }
 
 //Mock
-val pokemonMock1 = ModelListPokedex(
+val pokemonMock1 = ModelPokedexList(
     name = "Bolbasor",
     url = "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
     pokemonNumber = "1"
 )
-val pokemonMock2 = ModelListPokedex(
+val pokemonMock2 = ModelPokedexList(
     name = "Ivisor",
     url = "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
     pokemonNumber = "2"
 )
-val pokemonMock3 = ModelListPokedex(
+val pokemonMock3 = ModelPokedexList(
     name = "Venosor",
     url = "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",

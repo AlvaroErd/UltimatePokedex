@@ -4,5 +4,5 @@ data class ModelPokedex(
     val count: Int,
     val next: String,
     val previous: Any,
-    val results: List<ModelListPokedex>
+    val results: List<ModelPokedexList>
 )
