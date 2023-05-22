@@ -18,42 +18,40 @@ import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemonT
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemonTypeResponse
 
 fun RemotePokemon.toDomain(): ModelPokemon = ModelPokemon(
-        name = this.name,
-        id = this.getIdString(),
-        sprites = this.sprites
-//        types = this.types.map { it.toDomain() },
-//        height = this.getHeightString(),
-//        weight = this.getWeightString(),
-//        stats = this.stats.map { it.toDomain() },
-//        description = this.description
-)
+    name = this.name,
+    id = this.getIdString(),
+    sprites = this.sprites?.toDomain(),
+    types = this.types.map { it.toDomain() },
+    height = this.height,
+    weight = this.weight,
+    stats = this.stats.map { it.toDomain() },
 
-fun RemotePokemonSprites.toDomain(): ModelPokemonSprites = ModelPokemonSprites(
-        other = this.other.map { it.toDomain() },
-)
+    )
 
-fun RemotePokemonOther.toDomain(): ModelPokemonOther = ModelPokemonOther(
-        official_artwork = this.official_artwork.map { it.toDomain() },
-)
+fun RemotePokemonSprites.toDomain(): ModelPokemonSprites =
+    ModelPokemonSprites(other = this.other?.toDomain())
+
+fun RemotePokemonOther.toDomain(): ModelPokemonOther =
+    ModelPokemonOther(official_artwork = this.official_artwork?.toDomain())
 
 fun RemotePokemonOfficialArtwork.toDomain(): ModelPokemonOfficialArtwork =
-        ModelPokemonOfficialArtwork(front_default = this.front_default)
+    ModelPokemonOfficialArtwork(front_default = this.front_default)
 
 fun RemotePokemonTypeResponse.toDomain(): ModelPokemonTypeResponse = ModelPokemonTypeResponse(
-        slot = this.slot,
-        type = this.type.map { it.toDomain() },
+    slot = this.slot,
+    type = this.type.toDomain(),
 )
 
 fun RemotePokemonType.toDomain(): ModelPokemonType = ModelPokemonType(
-        url = this.url,
-        name = this.name,
+    url = this.url,
+    name = this.name,
 )
 
 fun RemotePokemonStats.toDomain(): ModelPokemonStats = ModelPokemonStats(
-        base_stats = this.base_stats,
-        stat = this.stat.map { it.toDomain() },
+    base_stats = this.base_stats,
+    stat = this.stat.toDomain(),
 )
 
 fun RemotePokemonStat.toDomain(): ModelPokemonStat = ModelPokemonStat(
-        name = this.name
+    name = this.name
 )

@@ -1,5 +1,6 @@
 package com.alerdoci.ultimatepokedex.app.screens.pokemon
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,44 +68,46 @@ class PokemonFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadPokemon() {
         this.binding?.apply {
-
-            this.tvName.text = currentPokemon?.name?.capitalized()!!
+            this.tvName.text = currentPokemon?.name?.capitalized()
             this.tvId.text = currentPokemon?.id.toString()
             this.ivPokemonImage.load(currentPokemon)
 
-            //this.ivPokemonImage.load(currentPokemon.sprites[0].other[0].official_artwork[0].front_default)
-//            this.ivBackgroundImage    //Add tint in base at type
+            this.ivPokemonImage.load(currentPokemon.let {
+                it?.sprites?.other?.official_artwork?.front_default
+            })
 
-//            this.tvType1.text = currentPokemon?.types?.get(1)?.type.name
-//
-//            if (currentPokemon?.types.size > 1) {
-//                tvType2.text = currentPokemon?.types?.get(1)?.type.name
-//                tvType2.visibility = View.VISIBLE
-//            } else {
-//                tvType2.visibility = View.GONE
-//            }
+            this.tvType1.text = currentPokemon?.let {
+                it.types[0].type.name.capitalized()
+            }
 
-//            this.tvDescription.text = currentPokemon.description
-//            this.tvHeight.text = currentPokemon.height.toString()
-//            this.textViewWeight.text = currentPokemon.weight.toString()
+            if ((currentPokemon?.types?.size ?: 0) > 1) {
+                tvType2.text = currentPokemon?.let {
+                    it.types[1].type.name.capitalized()
+                }
+                tvType2.visibility = View.VISIBLE
+            } else {
+                tvType2.visibility = View.GONE
+            }
 
-//            this.tvHp.text = currentPokemon.stats[0].base_stats.toString()
-//            this.tvAttack.text = currentPokemon.stats[1].base_stats.toString()
-//            this.tvDefense.text = currentPokemon.stats[2].base_stats.toString()
-//            this.tvSpAtk.text = currentPokemon.stats[3].base_stats.toString()
-//            this.tvSpDef.text = currentPokemon.stats[4].base_stats.toString()
-//            this.tvSpeed.text = currentPokemon.stats[5].base_stats.toString()
-//            this.tvTotal.text = currentPokemon.stats[6].base_stats.toString()
-//
-//            pbHp.progress = currentPokemon.stats[0].base_stats!!
-//            pbAttack.progress = currentPokemon.stats[1].base_stats!!
-//            pbDefense.progress = currentPokemon.stats[2].base_stats!!
-//            pbSpAtk.progress = currentPokemon.stats[3].base_stats!!
-//            pbSpDef.progress = currentPokemon.stats[4].base_stats!!
-//            pbSpeed.progress = currentPokemon.stats[5].base_stats!!
-//            pbTotal.progress = currentPokemon.stats[6].base_stats!!
+            this.tvWeight.text = "${currentPokemon?.weight?.div(10f)} kg"
+            this.tvHeight.text = "${currentPokemon?.height?.div(10f)} m"
+
+            this.tvHp.text = currentPokemon?.let { it.stats[0].base_stats.toString() }
+            this.tvAttack.text = currentPokemon?.let { it.stats[1].base_stats.toString() }
+            this.tvDefense.text = currentPokemon?.let { it.stats[2].base_stats.toString() }
+            this.tvSpAtk.text = currentPokemon?.let { it.stats[3].base_stats.toString() }
+            this.tvSpDef.text = currentPokemon?.let { it.stats[4].base_stats.toString() }
+            this.tvSpeed.text = currentPokemon?.let { it.stats[5].base_stats.toString() }
+
+            pbHp.progress = currentPokemon?.let { it.stats[0].base_stats } ?: 0
+            pbAttack.progress = currentPokemon?.let { it.stats[1].base_stats } ?: 0
+            pbDefense.progress = currentPokemon?.let { it.stats[2].base_stats } ?: 0
+            pbSpAtk.progress = currentPokemon?.let { it.stats[3].base_stats } ?: 0
+            pbSpDef.progress = currentPokemon?.let { it.stats[4].base_stats } ?: 0
+            pbSpeed.progress = currentPokemon?.let { it.stats[5].base_stats } ?: 0
         }
     }
 
