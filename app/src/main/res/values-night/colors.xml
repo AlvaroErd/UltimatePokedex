@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Theme -->
+    <color name="pokeTextBackground">#F5F5F5</color>
+    <color name="pokeTextOnSurface">#1C1C1C</color>
+    <color name="pokeSubTextOnSurface">#616161</color>
+    <color name="pokeCardOnSurface">#2C2C2C</color>
+
+</resources>

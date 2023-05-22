@@ -21,7 +21,7 @@
     <string name="types_is_not_implemented">Types is not implemented yet :D</string>
 
     //Pokemon Detail
-    <string name="about_this_pokemon">About this Pokemon</string>
+    <string name="about_this_pokemon">— About this Pokemon —</string>
     <string name="description">Description</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>

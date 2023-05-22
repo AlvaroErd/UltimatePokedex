@@ -24,9 +24,8 @@ fun RemotePokemon.toDomain(): ModelPokemon = ModelPokemon(
     types = this.types.map { it.toDomain() },
     height = this.height,
     weight = this.weight,
-    stats = this.stats.map { it.toDomain() },
-
-    )
+    stats = this.stats.map { it.toDomain() }
+)
 
 fun RemotePokemonSprites.toDomain(): ModelPokemonSprites =
     ModelPokemonSprites(other = this.other?.toDomain())

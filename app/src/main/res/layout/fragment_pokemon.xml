@@ -11,17 +11,37 @@
         android:layout_height="275dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_background_image"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ll_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pokemon_background_show"
-            android:tint="@color/yellow_700"
-            android:tintMode="add"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_background_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.95"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/poke_light_yellow" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@drawable/pokemon_background_show"
+                android:backgroundTint="@color/black"
+                android:backgroundTintMode="add"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/iv_pokemon_image"
@@ -29,10 +49,10 @@
             android:layout_height="150dp"
             android:layout_marginHorizontal="70dp"
             android:layout_marginTop="35dp"
-            android:src="@drawable/pikachu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/pikachu" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -40,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:textColor="@color/black"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="#F5F5F5"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +72,9 @@
             android:id="@+id/tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey_700"
+            android:alpha="0.8"
+            android:fontFamily="@font/dosis_medium"
+            android:textColor="#F5F5F5"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_name"
@@ -63,37 +86,51 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="55dp"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/iv_background_image"
+            app:layout_constraintBottom_toBottomOf="@id/ll_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/tv_type_1"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/background_rounded_for_types"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="2dp"
-                android:textColor="@color/black"
+                app:cardCornerRadius="100dp">
 
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                tools:text="Electric" />
+                <TextView
+                    android:id="@+id/tv_type_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_medium"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="#F5F5F5"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_name"
+                    tools:text="Electric" />
+            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tv_type_2"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:background="@drawable/background_rounded_for_types"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="2dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                tools:text="Normal" />
+                app:cardCornerRadius="100dp">
+
+                <TextView
+                    android:id="@+id/tv_type_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_medium"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="#F5F5F5"
+                    android:textSize="18sp"
+                    tools:text="Normal" />
+            </androidx.cardview.widget.CardView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,8 +139,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="-40dp"
         android:layout_marginBottom="-28dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/pokeTextOnSurface"
+        app:cardCornerRadius="40dp"
         app:cardElevation="10dp">
 
         <androidx.core.widget.NestedScrollView
@@ -121,9 +158,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/dosis_bold"
                     android:text="@string/about_this_pokemon"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/pokeTextBackground"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -157,7 +195,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="@color/pokeCardOnSurface"
+                    app:cardCornerRadius="24dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true">
 
@@ -176,21 +215,28 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/dosis_bold"
                                 android:text="@string/height"
                                 android:textAlignment="center"
+                                android:textColor="@color/pokeTextBackground"
                                 android:textSize="16sp" />
-
 
                             <TextView
                                 android:id="@+id/tv_height"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/dosis_regular"
                                 android:textAlignment="center"
-                                android:textColor="@color/black"
+                                android:textColor="@color/pokeTextBackground"
                                 android:textSize="16sp"
-                                tools:text="2,3.5 (0.70 cm)" />
+                                tools:text="0.4 m" />
 
                         </LinearLayout>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            app:dividerColor="@color/poke_gray" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -201,18 +247,21 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/dosis_bold"
                                 android:text="@string/weight"
                                 android:textAlignment="center"
+                                android:textColor="@color/pokeTextBackground"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/tv_weight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/dosis_regular"
                                 android:textAlignment="center"
-                                android:textColor="@color/black"
+                                android:textColor="@color/pokeTextBackground"
                                 android:textSize="16sp"
-                                tools:text="15.2 lbs (6.9kg)" />
+                                tools:text="6.0 kg" />
 
                         </LinearLayout>
 
@@ -231,7 +280,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/hp"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -239,8 +290,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="40" />
 
@@ -248,11 +300,12 @@
                         android:id="@+id/pb_hp"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="40" />
+                        android:max="255"
+                        android:progress="40"
+                        android:progressTint="@color/poke_teal" />
 
                 </LinearLayout>
 
@@ -267,7 +320,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/attack"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -275,8 +330,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="75" />
 
@@ -284,11 +340,12 @@
                         android:id="@+id/pb_attack"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="75" />
+                        android:max="255"
+                        android:progress="75"
+                        android:progressTint="@color/poke_light_pink" />
 
                 </LinearLayout>
 
@@ -303,7 +360,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/defense"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -311,8 +370,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="17" />
 
@@ -320,11 +380,12 @@
                         android:id="@+id/pb_defense"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="17" />
+                        android:max="255"
+                        android:progress="17"
+                        android:progressTint="@color/poke_light_blue" />
 
                 </LinearLayout>
 
@@ -339,7 +400,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/sp_atk"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -347,8 +410,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="80" />
 
@@ -356,11 +420,12 @@
                         android:id="@+id/pb_sp_atk"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="80" />
+                        android:max="255"
+                        android:progress="80"
+                        android:progressTint="@color/poke_light_purple" />
 
                 </LinearLayout>
 
@@ -375,7 +440,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/sp_def"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -383,8 +450,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="44" />
 
@@ -392,11 +460,12 @@
                         android:id="@+id/pb_sp_def"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="44" />
+                        android:max="255"
+                        android:progress="44"
+                        android:progressTint="@color/poke_light_yellow" />
 
                 </LinearLayout>
 
@@ -411,7 +480,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_bold"
                         android:text="@string/speed"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp" />
 
                     <TextView
@@ -419,8 +490,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
                         android:gravity="center_horizontal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/pokeTextBackground"
                         android:textSize="16sp"
                         tools:text="66" />
 
@@ -428,11 +500,12 @@
                         android:id="@+id/pb_speed"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                         android:layout_width="0dp"
-                        android:layout_height="3dp"
+                        android:layout_height="5dp"
                         android:layout_weight="4"
                         android:indeterminate="false"
-                        android:max="100"
-                        android:progress="66" />
+                        android:max="255"
+                        android:progress="66"
+                        android:progressTint="@color/poke_light_red" />
 
                 </LinearLayout>
 

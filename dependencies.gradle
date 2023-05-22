@@ -38,6 +38,7 @@ ext {
     composeUiUtilsVersion = '1.4.3'             // Compose foundations
     paletteVersion = '1.0.0'                    // Palette Color
     lifecyleRuntimeVersion = '2.6.0'            // Lifecycle Runtime Compose
+    materialMDCVersion = '1.9.0'                // Material 3 for XML views
 
     //testing
     jUnitVersion = "4.13.2"
@@ -83,6 +84,7 @@ ext {
             composeUiUtils         : "androidx.compose.ui:ui-util:${composeUiUtilsVersion}",
             palette                : "androidx.palette:palette:${paletteVersion}",
             lifecyleRuntime        : "androidx.lifecycle:lifecycle-runtime-compose:${lifecyleRuntimeVersion}",
+            materialMDC            : "com.google.android.material:material:${materialMDCVersion}",
     ]
 
     appTestDependencies = [

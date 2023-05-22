@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.alerdoci.ultimatepokedex.app.common.extensions.Extensions.capitalized
 import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
+import com.alerdoci.ultimatepokedex.app.common.utils.setLinearBackground
 import com.alerdoci.ultimatepokedex.app.screens.pokemon.viewmodel.PokemonViewModel
 import com.alerdoci.ultimatepokedex.databinding.FragmentPokemonBinding
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemon
@@ -59,7 +60,6 @@ class PokemonFragment : Fragment() {
                                 loadPokemon()
                             }
                         }
-
                         is ResourceState.Error -> {}
                         else -> {}
                     }
@@ -71,43 +71,38 @@ class PokemonFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun loadPokemon() {
         this.binding?.apply {
-            this.tvName.text = currentPokemon?.name?.capitalized()
-            this.tvId.text = currentPokemon?.id.toString()
-            this.ivPokemonImage.load(currentPokemon)
+            currentPokemon?.let { pokemon ->
+                tvName.text =
+                    pokemon.name?.capitalized()
+                tvId.text =
+                    pokemon.id.toString()
+                ivPokemonImage.load(pokemon.sprites?.other?.official_artwork?.front_default)
+                pokemon.types.let { types ->
 
-            this.ivPokemonImage.load(currentPokemon.let {
-                it?.sprites?.other?.official_artwork?.front_default
-            })
+                    tvType1.text =
+                        types.getOrNull(0)?.type?.name?.capitalized()
+                    val typeColor1 = types.getOrNull(0)?.type?.name
+                    setLinearBackground(typeColor1, tvType1)
 
-            this.tvType1.text = currentPokemon?.let {
-                it.types[0].type.name.capitalized()
-            }
+                    tvType2.text = types.getOrNull(1)?.type?.name?.capitalized()
+                    val typeColor2 = types.getOrNull(1)?.type?.name
+                    setLinearBackground(typeColor2, tvType2)
 
-            if ((currentPokemon?.types?.size ?: 0) > 1) {
-                tvType2.text = currentPokemon?.let {
-                    it.types[1].type.name.capitalized()
+                    val typeColorBg = types.getOrNull(0)?.type?.name
+                    setLinearBackground(typeColorBg, ivBackgroundImage)
+
                 }
-                tvType2.visibility = View.VISIBLE
-            } else {
-                tvType2.visibility = View.GONE
+                tvType2.visibility = if ((pokemon.types.size) > 1) View.VISIBLE else View.GONE
+                val baseStats = pokemon.stats.map { it.base_stats.toString() }
+                val textViews = listOf(tvHp, tvAttack, tvDefense, tvSpAtk, tvSpDef, tvSpeed)
+                val progressBars = listOf(pbHp, pbAttack, pbDefense, pbSpAtk, pbSpDef, pbSpeed)
+                for (i in 0 until 6) {
+                    textViews[i].text = baseStats[i]
+                    progressBars[i].progress = baseStats[i].toInt()
+                }
+                tvWeight.text = "${pokemon.weight?.div(10f)} kg"
+                tvHeight.text = "${pokemon.height?.div(10f)} m"
             }
-
-            this.tvWeight.text = "${currentPokemon?.weight?.div(10f)} kg"
-            this.tvHeight.text = "${currentPokemon?.height?.div(10f)} m"
-
-            this.tvHp.text = currentPokemon?.let { it.stats[0].base_stats.toString() }
-            this.tvAttack.text = currentPokemon?.let { it.stats[1].base_stats.toString() }
-            this.tvDefense.text = currentPokemon?.let { it.stats[2].base_stats.toString() }
-            this.tvSpAtk.text = currentPokemon?.let { it.stats[3].base_stats.toString() }
-            this.tvSpDef.text = currentPokemon?.let { it.stats[4].base_stats.toString() }
-            this.tvSpeed.text = currentPokemon?.let { it.stats[5].base_stats.toString() }
-
-            pbHp.progress = currentPokemon?.let { it.stats[0].base_stats } ?: 0
-            pbAttack.progress = currentPokemon?.let { it.stats[1].base_stats } ?: 0
-            pbDefense.progress = currentPokemon?.let { it.stats[2].base_stats } ?: 0
-            pbSpAtk.progress = currentPokemon?.let { it.stats[3].base_stats } ?: 0
-            pbSpDef.progress = currentPokemon?.let { it.stats[4].base_stats } ?: 0
-            pbSpeed.progress = currentPokemon?.let { it.stats[5].base_stats } ?: 0
         }
     }
 

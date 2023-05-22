@@ -67,6 +67,12 @@
     <color name="md_theme_dark_outlineVariant">#FF4B4639</color>
     <color name="md_theme_dark_scrim">#FF000000</color>
 
+    <!-- Light Theme -->
+    <color name="pokeTextBackground">#1C1C1C</color>
+    <color name="pokeTextOnSurface">#F5F5F5</color>
+    <color name="pokeSubTextOnSurface">#616161</color>
+    <color name="pokeCardOnSurface">#E6E5E5</color>
+
     // Pokecolors
     <color name="poke_black">#303943</color>
     <color name="poke_blue">#429BED</color>
@@ -81,6 +87,28 @@
     <color name="poke_red">#FA6555</color>
     <color name="poke_teal">#4FC1A6</color>
     <color name="poke_yellow">#F6C747</color>
+    <color name="poke_light_pink">#F6477E</color>
+    <color name="poke_gray">#474747</color>
+
+    //Poke colors Type
+    <color name="rock">#B69E31</color>
+    <color name="ghost">#70559B</color>
+    <color name="steel">#B7B9D0</color>
+    <color name="water">#6493EB</color>
+    <color name="grass">#74CB48</color>
+    <color name="physic">#FB5584</color>
+    <color name="ice">#9AD6DF</color>
+    <color name="dark">#75574C</color>
+    <color name="fairy">#E69EAC</color>
+    <color name="normal">#AAA67F</color>
+    <color name="fighting">#C12239</color>
+    <color name="flying">#A891EC</color>
+    <color name="poison">#A43E9E</color>
+    <color name="ground">#DEC16B</color>
+    <color name="bug">#A7B723</color>
+    <color name="fire">#F57D31</color>
+    <color name="electric">#F9CF30</color>
+    <color name="dragon">#7037FF</color>
 
     <!--reds-->
     <color name="red_50">#FFEBEE</color>

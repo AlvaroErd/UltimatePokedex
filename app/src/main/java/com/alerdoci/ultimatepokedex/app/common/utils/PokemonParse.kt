@@ -1,47 +1,27 @@
 package com.alerdoci.ultimatepokedex.app.common.utils
 
-import androidx.compose.ui.graphics.Color
-import com.alerdoci.ultimatepokedex.app.theme.typeBug
-import com.alerdoci.ultimatepokedex.app.theme.typeDark
-import com.alerdoci.ultimatepokedex.app.theme.typeDragon
-import com.alerdoci.ultimatepokedex.app.theme.typeElectric
-import com.alerdoci.ultimatepokedex.app.theme.typeFairy
-import com.alerdoci.ultimatepokedex.app.theme.typeFighting
-import com.alerdoci.ultimatepokedex.app.theme.typeFire
-import com.alerdoci.ultimatepokedex.app.theme.typeFlying
-import com.alerdoci.ultimatepokedex.app.theme.typeGhost
-import com.alerdoci.ultimatepokedex.app.theme.typeGrass
-import com.alerdoci.ultimatepokedex.app.theme.typeGround
-import com.alerdoci.ultimatepokedex.app.theme.typeIce
-import com.alerdoci.ultimatepokedex.app.theme.typeNormal
-import com.alerdoci.ultimatepokedex.app.theme.typePoison
-import com.alerdoci.ultimatepokedex.app.theme.typePsychic
-import com.alerdoci.ultimatepokedex.app.theme.typeRock
-import com.alerdoci.ultimatepokedex.app.theme.typeSteel
-import com.alerdoci.ultimatepokedex.app.theme.typeWater
-import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemonType
-import java.util.Locale
+import android.view.View
+import com.alerdoci.ultimatepokedex.R
 
-fun parseTypeToColor(type: ModelPokemonType): Color {
-    return when (type.name.lowercase(Locale.ROOT)) {
-        "normal" -> typeNormal
-        "fire" -> typeFire
-        "water" -> typeWater
-        "electric" -> typeElectric
-        "grass" -> typeGrass
-        "ice" -> typeIce
-        "fighting" -> typeFighting
-        "poison" -> typePoison
-        "ground" -> typeGround
-        "flying" -> typeFlying
-        "psychic" -> typePsychic
-        "bug" -> typeBug
-        "rock" -> typeRock
-        "ghost" -> typeGhost
-        "dragon" -> typeDragon
-        "dark" -> typeDark
-        "steel" -> typeSteel
-        "fairy" -> typeFairy
-        else -> Color.Black
+fun setLinearBackground(type: String?, view: View) {
+    when (type) {
+        "poison" -> view.setBackgroundResource(R.color.poison)
+        "grass" -> view.setBackgroundResource(R.color.grass)
+        "fire" -> view.setBackgroundResource(R.color.fire)
+        "normal" -> view.setBackgroundResource(R.color.normal)
+        "flying" -> view.setBackgroundResource(R.color.flying)
+        "rock" -> view.setBackgroundResource(R.color.rock)
+        "water" -> view.setBackgroundResource(R.color.water)
+        "ice" -> view.setBackgroundResource(R.color.ice)
+        "ghost" -> view.setBackgroundResource(R.color.ghost)
+        "steel" -> view.setBackgroundResource(R.color.steel)
+        "physic" -> view.setBackgroundResource(R.color.physic)
+        "dark" -> view.setBackgroundResource(R.color.dark)
+        "fairy" -> view.setBackgroundResource(R.color.fairy)
+        "fighting" -> view.setBackgroundResource(R.color.fighting)
+        "ground" -> view.setBackgroundResource(R.color.ground)
+        "bug" -> view.setBackgroundResource(R.color.bug)
+        "electric" -> view.setBackgroundResource(R.color.electric)
+        "dragon" -> view.setBackgroundResource(R.color.dragon)
     }
 }

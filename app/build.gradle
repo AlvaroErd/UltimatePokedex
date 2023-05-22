@@ -111,6 +111,7 @@ dependencies {
     implementation appDependencies.composeUiUtils
     implementation appDependencies.palette
     implementation appDependencies.lifecyleRuntime
+    implementation appDependencies.materialMDC
 
 
     implementation dataDependencies.retrofit
