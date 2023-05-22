@@ -20,7 +20,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,22 +29,32 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.ImageLoader
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.app.common.extensions.Extensions.capitalized
 import com.alerdoci.ultimatepokedex.app.common.states.ResourceState
@@ -56,7 +65,8 @@ import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.PokedexViewMod
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.pokemonMock1
 import com.alerdoci.ultimatepokedex.app.theme.TopCardShape
 import com.alerdoci.ultimatepokedex.app.theme.blue_grey_800
-import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelListPokedex
+import com.alerdoci.ultimatepokedex.app.theme.dosisFont
+import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 
 @Composable
 fun PokedexScreen(onItemClick: (String) -> Unit) {
@@ -99,28 +109,67 @@ fun PokedexScreen(onItemClick: (String) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 fun PokedexList(
     viewModel: PokedexViewModel = hiltViewModel(),
     onItemClick: (pokemonName: String) -> Unit,
 ) {
     val pokedexListState by viewModel.pokedex.collectAsStateWithLifecycle()
-    var items by remember { mutableStateOf<List<ModelListPokedex>>(emptyList()) }
+    var items by remember { mutableStateOf<List<ModelPokedexList>>(emptyList()) }
 
     when (pokedexListState) {
         is ResourceState.Loading -> Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            CircularProgressIndicator()
+            val animation by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.lottie_three_digglets_loading))
+            Column(
+                horizontalAlignment = CenterHorizontally,
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+            ) {
+                LottieAnimation(
+                    composition = animation,
+                    isPlaying = true,
+                    restartOnPlay = true,
+                    iterations = LottieConstants.IterateForever,
+                    modifier = Modifier
+                        .height(140.dp)
+                        .padding(bottom = 10.dp)
+                )
+            }
         }
-        is ResourceState.Error -> Text(text = "Error")
-        is ResourceState.Success -> items =
-            (pokedexListState as ResourceState.Success).data as List<ModelListPokedex>
 
-        else -> { }
+        is ResourceState.Error -> Box(
+            contentAlignment = Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column() {
+                Text(
+                    text = stringResource(R.string.oops_something_went_wrong),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 40.sp,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = dosisFont,
+
+                        brush = Brush.linearGradient(
+                            colors = listOf(Color(0xFFEC5262), Color(0xFFDAC8C8), Color(0xFFEC5262))
+                        )
+                    ),
+                )
+                ImageGif(img = R.drawable.pikachu_sad, imgGifModifier = Modifier.size(160.dp))
+            }
+        }
+
+        is ResourceState.Success -> items =
+            (pokedexListState as ResourceState.Success).data as List<ModelPokedexList>
+
+        else -> {}
     }
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
@@ -140,7 +189,7 @@ fun PokedexList(
 
 @Composable
 fun PokemonCard(
-    pokemon: ModelListPokedex,
+    pokemon: ModelPokedexList,
     modifier: Modifier = Modifier,
     viewModel: PokedexViewModel = hiltViewModel(),
     onItemClick: (pokemonId: String) -> Unit
