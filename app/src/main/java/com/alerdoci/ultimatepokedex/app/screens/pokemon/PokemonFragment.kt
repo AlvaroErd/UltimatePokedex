@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 @AndroidEntryPoint
 class PokemonFragment : Fragment() {
@@ -60,6 +61,7 @@ class PokemonFragment : Fragment() {
                                 loadPokemon()
                             }
                         }
+
                         is ResourceState.Error -> {}
                         else -> {}
                     }
@@ -77,6 +79,7 @@ class PokemonFragment : Fragment() {
                 tvId.text =
                     pokemon.id.toString()
                 ivPokemonImage.load(pokemon.sprites?.other?.official_artwork?.front_default)
+                tvNameOutlined.text = pokemon.name?.uppercase(Locale.ROOT)
                 pokemon.types.let { types ->
 
                     tvType1.text =
