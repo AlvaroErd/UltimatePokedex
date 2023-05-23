@@ -46,7 +46,7 @@
                 android:id="@+id/tv_name_outlined"
                 android:layout_width="750dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/shapiro_outlined"
+                android:fontFamily="@font/dosis_regular"
                 android:textColor="@color/white"
                 android:textSize="50sp"
                 android:maxLines="1"
@@ -57,7 +57,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="PIKACHU" />
+                tools:text="フシギダネ" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
