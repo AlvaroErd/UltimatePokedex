@@ -14,7 +14,7 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/release/
+/app/src/release/*
 =======
 # Gradle files
 .gradle/
