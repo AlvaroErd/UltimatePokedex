@@ -51,3 +51,5 @@ val dosisFont = FontFamily(
     )
 )
 val pokemonFont = FontFamily(Font(R.font.pokemon))
+
+val shapiroOutlinedFont = FontFamily(Font(R.font.shapiro_outlined))

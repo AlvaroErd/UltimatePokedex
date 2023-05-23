@@ -19,6 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <ImageView
                 android:id="@+id/iv_background_image"
                 android:layout_width="match_parent"
@@ -40,6 +41,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name_outlined"
+                android:layout_width="750dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shapiro_outlined"
+                android:textColor="@color/white"
+                android:textSize="50sp"
+                android:maxLines="1"
+                android:rotation="-90"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:alpha="0.4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="PIKACHU" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
