@@ -32,4 +32,7 @@
     <string name="sp_atk">Sp. Atk</string>
     <string name="defense">Defense</string>
     <string name="attack">Attack</string>
+    <string name="shape">Shape</string>
+    <string name="type">Type</string>
+    <string name="generation">Generation</string>
 </resources>

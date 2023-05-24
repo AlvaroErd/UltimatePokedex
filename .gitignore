@@ -15,6 +15,7 @@
 .cxx
 local.properties
 /app/src/release/*
+ToDo_UltimatePokedex.txt
 =======
 # Gradle files
 .gradle/

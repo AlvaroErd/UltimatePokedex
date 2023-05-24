@@ -23,5 +23,8 @@ fun setLinearBackground(type: String?, view: View) {
         "bug" -> view.setBackgroundResource(R.color.bug)
         "electric" -> view.setBackgroundResource(R.color.electric)
         "dragon" -> view.setBackgroundResource(R.color.dragon)
+        else -> {
+            view.setBackgroundResource(R.color.normal)
+        }
     }
 }

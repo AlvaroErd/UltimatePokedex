@@ -76,6 +76,7 @@ dependencies {
     def appDependencies = rootProject.ext.appDependencies
     def appTestDependencies = rootProject.ext.appTestDependencies
 
+    //App
     implementation appDependencies.kotlin
     implementation appDependencies.coreKtx
     implementation appDependencies.lifecycle
@@ -113,11 +114,6 @@ dependencies {
     implementation appDependencies.lifecyleRuntime
     implementation appDependencies.materialMDC
 
-
-    implementation dataDependencies.retrofit
-    implementation dataDependencies.retrofitConverter
-    implementation dataDependencies.okHttp
-    implementation dataDependencies.datastore
     testImplementation appTestDependencies.jUnit
 
     androidTestImplementation appTestDependencies.androidJUnit
@@ -126,6 +122,14 @@ dependencies {
 
     debugImplementation appTestDependencies.composeUiTooling
     debugImplementation appTestDependencies.composeUiTestManifest
+
+    //data
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitConverter
+    implementation dataDependencies.okHttp
+    implementation dataDependencies.datastore
+
+    testImplementation dataTestDependencies.mockk
 }
 
 kapt {

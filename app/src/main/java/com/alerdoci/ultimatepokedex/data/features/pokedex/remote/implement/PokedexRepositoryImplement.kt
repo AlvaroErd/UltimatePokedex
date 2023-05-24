@@ -2,9 +2,11 @@ package com.alerdoci.ultimatepokedex.data.features.pokedex.remote.implement
 
 import com.alerdoci.ultimatepokedex.data.features.pokedex.mappers.toDomain
 import com.alerdoci.ultimatepokedex.data.features.pokemon.mappers.toDomain
+import com.alerdoci.ultimatepokedex.data.features.pokemonDescription.mappers.toDomain
 import com.alerdoci.ultimatepokedex.data.remote.service.PokedexService
 import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemon
+import com.alerdoci.ultimatepokedex.domain.models.features.pokemonDescription.ModelPokemonDescription
 import com.alerdoci.ultimatepokedex.domain.repository.PokedexRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,6 +26,7 @@ open class PokedexRepositoryImplement @Inject constructor(
         } else {
             emit(emptyList())
         }
+
     }
 
     override suspend fun getPokemon(pokemonName: String): Flow<ModelPokemon> = flow {
@@ -36,4 +39,16 @@ open class PokedexRepositoryImplement @Inject constructor(
             }
         }
     }
+
+    override suspend fun getPokemonDescription(pokemonName: String): Flow<ModelPokemonDescription> =
+        flow {
+
+            val pokemonDescription = remoteService.getPokemonDescription(pokemonName)
+
+            if (pokemonDescription.isSuccessful) {
+                pokemonDescription.body()?.let { pokemonResponseDescription ->
+                    emit(pokemonResponseDescription.toDomain())
+                }
+            }
+        }
 }

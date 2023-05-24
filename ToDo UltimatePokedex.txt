@@ -1,7 +1,0 @@
-02-05-2023
-
-// Todo
-Add pong easter egg
-Generate random quote, gif, pokemon,
-Your pokedex
-Add some game (match cards, tik tak toe pokemon)

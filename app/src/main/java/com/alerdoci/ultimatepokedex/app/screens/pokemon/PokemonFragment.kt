@@ -17,12 +17,12 @@ import com.alerdoci.ultimatepokedex.app.common.utils.setLinearBackground
 import com.alerdoci.ultimatepokedex.app.screens.pokemon.viewmodel.PokemonViewModel
 import com.alerdoci.ultimatepokedex.databinding.FragmentPokemonBinding
 import com.alerdoci.ultimatepokedex.domain.models.features.pokemon.ModelPokemon
+import com.alerdoci.ultimatepokedex.domain.models.features.pokemonDescription.ModelPokemonDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Locale
 
 @AndroidEntryPoint
 class PokemonFragment : Fragment() {
@@ -36,7 +36,9 @@ class PokemonFragment : Fragment() {
 
     private val viewModel: PokemonViewModel by viewModels()
     private var binding: FragmentPokemonBinding? = null
+
     private var currentPokemon: ModelPokemon? = null
+    private var currentPokemonDescription: ModelPokemonDescription? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,15 +52,37 @@ class PokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.currentPokemon.collectLatest { pokemonState ->
-                    when (pokemonState) {
+                launch(Dispatchers.IO) {
+
+//                        viewLifecycleOwner.lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//
+                    viewModel.currentPokemon.collectLatest { pokemonState ->
+                        when (pokemonState) {
+                            is ResourceState.Loading -> {}
+                            is ResourceState.Success -> {
+                                currentPokemon = pokemonState.data as ModelPokemon
+                                withContext(Dispatchers.Main) {
+                                    loadPokemon()
+                                }
+                            }
+
+                            is ResourceState.Error -> {}
+                            else -> {}
+                        }
+                    }
+                }
+
+                viewModel.currentPokemonDescription.collectLatest { pokemonStateDescription ->
+                    when (pokemonStateDescription) {
                         is ResourceState.Loading -> {}
                         is ResourceState.Success -> {
-                            currentPokemon = pokemonState.data as ModelPokemon
+                            currentPokemonDescription =
+                                pokemonStateDescription.data as ModelPokemonDescription
                             withContext(Dispatchers.Main) {
-                                loadPokemon()
+                                loadPokemonDescription()
                             }
                         }
 
@@ -79,7 +103,6 @@ class PokemonFragment : Fragment() {
                 tvId.text =
                     pokemon.id.toString()
                 ivPokemonImage.load(pokemon.sprites?.other?.official_artwork?.front_default)
-                tvNameOutlined.text = pokemon.name?.uppercase(Locale.ROOT)
                 pokemon.types.let { types ->
 
                     tvType1.text =
@@ -93,8 +116,8 @@ class PokemonFragment : Fragment() {
 
                     val typeColorBg = types.getOrNull(0)?.type?.name
                     setLinearBackground(typeColorBg, ivBackgroundImage)
-
                 }
+
                 tvType2.visibility = if ((pokemon.types.size) > 1) View.VISIBLE else View.GONE
                 val baseStats = pokemon.stats.map { it.base_stats.toString() }
                 val textViews = listOf(tvHp, tvAttack, tvDefense, tvSpAtk, tvSpDef, tvSpeed)
@@ -106,6 +129,34 @@ class PokemonFragment : Fragment() {
                 tvWeight.text = "${pokemon.weight?.div(10f)} kg"
                 tvHeight.text = "${pokemon.height?.div(10f)} m"
             }
+        }
+//        currentPokemonDescription?.let { pokemonDescription ->
+//            tvNameOutlined.text = pokemonDescription.name
+//        }
+    }
+
+    private fun loadPokemonDescription() {
+        this.binding?.apply {
+            currentPokemonDescription?.let { pokemonDescription ->
+                tvNameOutlined.text = pokemonDescription.names[0].name
+            }
+
+            currentPokemonDescription?.let { pokemonDescription ->
+                tvDescription.text =
+                    pokemonDescription.flavorTextEntries[0].flavorText.replace("\n", " ").replace(
+                        "POKéMON",
+                        "Pokémon"
+                    ) + " " + pokemonDescription.flavorTextEntries[2].flavorText.replace("\n", " ")
+                        .replace("POKéMON", "Pokémon")
+            }
+
+            tvShape.text = currentPokemonDescription?.shape?.name?.capitalized()
+
+            currentPokemonDescription?.let { pokemonDescription ->
+                tvType.text =
+                    pokemonDescription.genera[7].genus.capitalized().replace(" pokémon", "")
+            }
+            tvGeneration.text = currentPokemonDescription?.generation?.name?.capitalized()
         }
     }
 

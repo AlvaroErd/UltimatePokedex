@@ -40,6 +40,7 @@ ext {
     lifecyleRuntimeVersion = '2.6.0'            // Lifecycle Runtime Compose
     materialMDCVersion = '1.9.0'                // Material 3 for XML views
 
+
     //testing
     jUnitVersion = "4.13.2"
     jUnitAndroidVersion = "1.1.5"
@@ -47,6 +48,7 @@ ext {
     composeUiTestJUnitVersion = '1.3.3'
     composeUiToolingVersion = '1.3.3'
     composeUiTestManifestVersion = '1.3.3'
+    mockkVersion = '1.13.5'
 
     //app
     appDependencies = [
@@ -116,6 +118,7 @@ ext {
             jUnit           : "junit:junit:${jUnitVersion}",
             androidTestJUnit: "androidx.test.ext:junit:${jUnitAndroidVersion}",
             espresso        : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockk           : "io.mockk:mockk:${mockkVersion}",
     ]
 
 }
