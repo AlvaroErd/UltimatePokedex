@@ -1,5 +1,6 @@
 package com.alerdoci.ultimatepokedex.app.screens.pokedex.composables
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,9 +19,16 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,10 +72,12 @@ import com.alerdoci.ultimatepokedex.app.components.PokemonNumber
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.PokedexViewModel
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.pokemonMock1
 import com.alerdoci.ultimatepokedex.app.theme.TopCardShape
-import com.alerdoci.ultimatepokedex.app.theme.blue_grey_800
 import com.alerdoci.ultimatepokedex.app.theme.dosisFont
+import com.alerdoci.ultimatepokedex.app.theme.poke_red_dark
 import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PokedexScreen(onItemClick: (String) -> Unit) {
     Surface(
@@ -75,34 +85,79 @@ fun PokedexScreen(onItemClick: (String) -> Unit) {
         color = MaterialTheme.colorScheme.background
     )
     {
-        Column() {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                colors = CardDefaults.cardColors(containerColor = blue_grey_800),
-                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-                shape = TopCardShape.large
-            )
-            {
+        var textSearched by remember { mutableStateOf("") }
+        var textActive by remember { mutableStateOf(false) }
+
+        Scaffold() {
+            Column() {
+                Card(
+                    modifier = Modifier
+                        .padding(bottom = 10.dp)
+                        .fillMaxWidth()
+                        .height(150.dp),
+                    colors = CardDefaults.cardColors(containerColor = poke_red_dark),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+                    shape = TopCardShape.large
+                )
+                {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = CenterHorizontally,
+                    ) {
+                        ImageGif(
+                            img = R.drawable.pokemon_logo_animated_shimme,
+                            imgGifModifier = Modifier.height(60.dp)
+                        )
+                        SearchBar(
+                            query = textSearched,
+                            onQueryChange = { newTextSerached ->
+                                textSearched =
+                                    newTextSerached
+                            },
+                            onSearch = {
+                                textActive = false
+//                                textSearched = ""
+                            },
+                            active = textActive,
+                            onActiveChange = {
+                                textActive = it
+                            },
+                            placeholder = { Text(text = "Search pokemon") },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = "Search icon"
+                                )
+                            },
+                            trailingIcon = {
+                                if (textActive) {
+                                    Icon(
+                                        modifier = Modifier.clickable {
+                                            if (textSearched.isNotEmpty()) {
+                                                textSearched = ""
+                                            } else {
+                                                textActive = false
+                                            }
+                                        },
+                                        imageVector = Icons.Default.Close,
+                                        contentDescription = "Close icon",
+                                    )
+                                }
+                            },
+                        ) {
+
+                        }
+                    }
+                }
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .fillMaxWidth(),
                     horizontalAlignment = CenterHorizontally,
                 ) {
-                    ImageGif(
-                        img = R.drawable.pokemon_logo_animated_shimme,
-                        imgGifModifier = Modifier.size(160.dp)
-                    )
-                }
-            }
-            Column(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-                    .fillMaxWidth(),
-                horizontalAlignment = CenterHorizontally,
-            ) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    PokedexList(onItemClick = onItemClick)
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        PokedexList(onItemClick = onItemClick)
+                    }
                 }
             }
         }
@@ -169,13 +224,12 @@ fun PokedexList(
 
         else -> {}
     }
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
-        contentPadding = PaddingValues(all = 4.dp),
+            .padding(start = 10.dp, end = 10.dp, bottom = 20.dp),
+        contentPadding = PaddingValues(start = 4.dp, end = 4.dp, bottom = 4.dp, top = 0.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.Center,
     ) {

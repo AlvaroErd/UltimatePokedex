@@ -86,6 +86,7 @@ val poke_purple = Color(0xFF7C538C)
 val poke_red = Color(0xFFFA6555)
 val poke_teal = Color(0xFF4FC1A6)
 val poke_yellow = Color(0xFFF6C747)
+val poke_red_dark = Color(0xFFE45459)
 
 //Pokemon Types
 val typeNormal = Color(0xFFA8A77A)

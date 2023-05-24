@@ -91,6 +91,7 @@ dependencies {
     implementation appDependencies.coil
     implementation appDependencies.coilGif
     implementation appDependencies.material3
+    implementation appDependencies.materialExtendedIcons
     implementation appDependencies.material3Window
     implementation appDependencies.accompanist
     implementation appDependencies.accompanistPager

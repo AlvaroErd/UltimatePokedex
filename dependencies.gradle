@@ -15,30 +15,31 @@ ext {
     pagingRuntimeVersion = '3.1.1'
     navigationFragmentKtxVersion = '2.5.3'
     navigationUiKtxVersion = '2.5.3'
-    retrofitVersion = '2.9.0'                   // Retrofit
-    gsonVersion = '2.10.1'                      // Gson for retrofit
-    okHttpVersion = '4.10.0'                    // OkHttp
-    coroutinesVersion = ' 1.6.1'                // Coroutines
-    hiltVersion = '2.45'                        // Hilt
-    kaptVersion = '2.44'                        // Hilt Compiler
-    hiltComposeVersion = '1.0.0'                // Hilt Compiler
-    coilVersion = '2.3.0'                       // Coil
-    coilGifVersion = '2.3.0'                    // Coil Gif
-    material3Version = '1.0.1'                  // Material3
-    material3WindowVersion = '1.0.1'            // Material3 Windows size
-    accompanistVersion = '0.27.0'               // Accompanist / Pager and Indicators
-    accompanistSystemVersion = '0.17.0'         // Accompanist / Pager and Indicators
-    navigationComposeVersion = '2.5.0-alpha02'  // Navigation Compose
-    pagingComposeVersion = '1.0.0-alpha17'      // Paging 3.0
-    constraintLayoutVersion = '2.1.4'           // Constraint Compose
-    splashScreenVersion = '1.0.0-beta01'        // Splash Screen
-    lottieVersion = '4.2.0'                     // Lottie
-    dataStorePreferencesVersion = '1.0.0'       // DataStore Preferences
-    composeFoundationVersion = '1.4.0-beta02'   // Compose foundations
-    composeUiUtilsVersion = '1.4.3'             // Compose foundations
-    paletteVersion = '1.0.0'                    // Palette Color
-    lifecyleRuntimeVersion = '2.6.0'            // Lifecycle Runtime Compose
-    materialMDCVersion = '1.9.0'                // Material 3 for XML views
+    retrofitVersion = '2.9.0'                       // Retrofit
+    gsonVersion = '2.10.1'                          // Gson for retrofit
+    okHttpVersion = '4.10.0'                        // OkHttp
+    coroutinesVersion = ' 1.6.1'                    // Coroutines
+    hiltVersion = '2.45'                            // Hilt
+    kaptVersion = '2.44'                            // Hilt Compiler
+    hiltComposeVersion = '1.0.0'                    // Hilt Compiler
+    coilVersion = '2.3.0'                           // Coil
+    coilGifVersion = '2.3.0'                        // Coil Gif
+    material3Version = '1.1.0-alpha06'              // Material3
+    materialExtendedIconsVersion = '1.1.0-alpha06'  // Material Extended Icons
+    material3WindowVersion = '1.0.1'                // Material3 Windows size
+    accompanistVersion = '0.27.0'                   // Accompanist / Pager and Indicators
+    accompanistSystemVersion = '0.17.0'             // Accompanist / Pager and Indicators
+    navigationComposeVersion = '2.5.0-alpha02'      // Navigation Compose
+    pagingComposeVersion = '1.0.0-alpha17'          // Paging 3.0
+    constraintLayoutVersion = '2.1.4'               // Constraint Compose
+    splashScreenVersion = '1.0.0-beta01'            // Splash Screen
+    lottieVersion = '4.2.0'                         // Lottie
+    dataStorePreferencesVersion = '1.0.0'           // DataStore Preferences
+    composeFoundationVersion = '1.4.0-beta02'       // Compose foundations
+    composeUiUtilsVersion = '1.4.3'                 // Compose foundations
+    paletteVersion = '1.0.0'                        // Palette Color
+    lifecyleRuntimeVersion = '2.6.0'                // Lifecycle Runtime Compose
+    materialMDCVersion = '1.9.0'                    // Material 3 for XML views
 
 
     //testing
@@ -66,6 +67,7 @@ ext {
             coil                   : "io.coil-kt:coil-compose:${coilVersion}",
             coilGif                : "io.coil-kt:coil-gif:${coilGifVersion}",
             material3              : "androidx.compose.material3:material3:${material3Version}",
+            materialExtendedIcons  : "androidx.compose.material:material-icons-extended:${materialExtendedIconsVersion}",
             material3Window        : "androidx.compose.material3:material3-window-size-class:${material3WindowVersion}",
             accompanist            : "com.google.accompanist:accompanist-systemuicontroller:${accompanistSystemVersion}",
             accompanistPager       : "com.google.accompanist:accompanist-pager:$accompanistVersion",
