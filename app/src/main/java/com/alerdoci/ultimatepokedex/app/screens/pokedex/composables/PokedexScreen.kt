@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -73,6 +74,7 @@ import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.PokedexViewMod
 import com.alerdoci.ultimatepokedex.app.screens.pokedex.viewmodel.pokemonMock1
 import com.alerdoci.ultimatepokedex.app.theme.TopCardShape
 import com.alerdoci.ultimatepokedex.app.theme.dosisFont
+import com.alerdoci.ultimatepokedex.app.theme.poke_light_red
 import com.alerdoci.ultimatepokedex.app.theme.poke_red_dark
 import com.alerdoci.ultimatepokedex.domain.models.features.pokedex.ModelPokedexList
 
@@ -122,13 +124,14 @@ fun PokedexScreen(onItemClick: (String) -> Unit) {
                             onActiveChange = {
                                 textActive = it
                             },
-                            placeholder = { Text(text = "Search pokemon") },
+                            placeholder = { Text(text = "Search pokemon (Coming soon)") },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Default.Search,
                                     contentDescription = "Search icon"
                                 )
                             },
+                            colors = SearchBarDefaults.colors(dividerColor = poke_light_red),
                             trailingIcon = {
                                 if (textActive) {
                                     Icon(
