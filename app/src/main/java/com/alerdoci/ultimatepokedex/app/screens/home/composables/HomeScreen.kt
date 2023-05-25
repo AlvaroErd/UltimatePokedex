@@ -1,14 +1,14 @@
 package com.alerdoci.ultimatepokedex.app.screens.home.composables
 
 import android.content.res.Configuration
-import android.widget.Toast
+import android.media.MediaPlayer
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,15 +19,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -48,6 +53,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieClipSpec
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.alerdoci.ultimatepokedex.R
 import com.alerdoci.ultimatepokedex.app.components.CardMain
 import com.alerdoci.ultimatepokedex.app.navigation.Screen
@@ -65,6 +74,30 @@ import com.alerdoci.ultimatepokedex.app.theme.spacing
 fun HomeScreen(
     navController: NavController,
 ) {
+    val context = LocalContext.current
+    val mediaPlayer = remember { MediaPlayer.create(context, R.raw.pokemon_ost_title_screen) }
+    var isPlaying by remember { mutableStateOf(false) }
+    val lottiePlay by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.lottie_play_pause))
+    val infiniteTransition = rememberInfiniteTransition()
+    val rotationAnimation = infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(tween(1000, easing = LinearEasing))
+    )
+    val rainbowColorsBrush = remember {
+        Brush.sweepGradient(
+            listOf(
+                Color(0xFF9575CD),
+                Color(0xFFBA68C8),
+                Color(0xFFE57373),
+                Color(0xFFFFB74D),
+                Color(0xFFFFF176),
+                Color(0xFFAED581),
+                Color(0xFF4DD0E1),
+                Color(0xFF9575CD)
+            )
+        )
+    }
     Surface(
         color = MaterialTheme.colorScheme.background,
     ) {
@@ -188,62 +221,67 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 30.dp)
-                    .wrapContentSize(Alignment.BottomCenter)
-                    .offset(0.dp, 50.dp)
+                    .padding(bottom = 25.dp, start = 10.dp)
+//                    .wrapContentSize(Alignment.BottomCenter)
+                    .offset(0.dp, 30.dp),
+                contentAlignment = Alignment.BottomStart
             ) {
-                val infiniteTransition = rememberInfiniteTransition()
+                Row(verticalAlignment = Alignment.CenterVertically) {
 
-                val rotationAnimation = infiniteTransition.animateFloat(
-                    initialValue = 0f,
-                    targetValue = 360f,
-                    animationSpec = infiniteRepeatable(tween(1000, easing = LinearEasing))
-                )
-
-                val rainbowColorsBrush = remember {
-                    Brush.sweepGradient(
-                        listOf(
-                            Color(0xFF9575CD),
-                            Color(0xFFBA68C8),
-                            Color(0xFFE57373),
-                            Color(0xFFFFB74D),
-                            Color(0xFFFFF176),
-                            Color(0xFFAED581),
-                            Color(0xFF4DD0E1),
-                            Color(0xFF9575CD)
-                        )
+                    Button(
+                        modifier = Modifier
+                            .height(110.dp)
+                            .width(110.dp)
+                            .drawBehind {
+                                rotate(rotationAnimation.value) {
+                                    drawCircle(
+                                        rainbowColorsBrush,
+                                        radius = 30.dp.toPx(),
+                                        style = Stroke(width = 6.dp.toPx())
+                                    )
+                                }
+                            }
+                            .padding(2.dp)
+                            .background(Color.Transparent)
+                            .clip(CircleShape),
+                        onClick = {
+                            isPlaying = !isPlaying
+                            if (isPlaying) {
+                                mediaPlayer.start()
+                            } else {
+                                mediaPlayer.pause()
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            Color.Transparent
+                        ),
+                    )
+                    {
+                        if (isPlaying) {
+                            LottieAnimation(
+                                composition = lottiePlay,
+                                clipSpec = LottieClipSpec.Progress(0.0f, 0.5f)
+                            )
+                        } else {
+                            LottieAnimation(
+                                composition = lottiePlay,
+                                clipSpec = LottieClipSpec.Progress(0.5f, 1f)
+                            )
+                        }
+                    }
+                    Text(
+                        text =
+                        if (isPlaying) {
+                            stringResource(id = R.string.now_playing)
+                        } else {
+                            stringResource(id = R.string.play_music)
+                        },
+                        fontSize = 16.sp,
+                        fontFamily = dosisFont,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
-                val context = LocalContext.current
-
-                Image(
-                    painterResource(id = R.drawable.logo_pokemon_present),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .height(40.dp)
-                        .drawBehind {
-                            rotate(rotationAnimation.value) {
-                                drawCircle(
-                                    rainbowColorsBrush,
-                                    radius = 80.dp.toPx(),
-                                    style = Stroke(width = 8.dp.toPx())
-                                )
-                            }
-                        }
-                        .padding(2.dp)
-                        .offset(0.dp, (-30).dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            Toast
-                                .makeText(
-                                    context,
-                                    "Gotta catch 'em all, buddy!!",
-                                    Toast.LENGTH_SHORT
-                                )
-                                .show()
-//                    .blur(radiusX = 4.dp, radiusY = 4.dp)
-                        },
-                )
             }
         }
     }

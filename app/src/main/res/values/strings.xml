@@ -8,6 +8,8 @@
     <string name="pokedex">Pokédex</string>
     <string name="moves">Moves</string>
     <string name="favorites">Favorites</string>
+    <string name="now_playing">Now playing: \nPokémon Red/Blue Opening theme</string>
+    <string name="play_music">Play some awesome Music!</string>
 
     //Error control
     <string name="error_couldnt_reach_server">Oops! Couldn\'t reach server. \n Check your internet connection.</string>
